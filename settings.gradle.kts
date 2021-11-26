@@ -35,8 +35,17 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
     }
 }
 
-rootProject.name = "mvivm"
+rootProject.name = "stdlib"
 
-includeSubs("live", "live", "core", "react", "compose", "coroutines")
-includeSubs("viewmodel", "viewmodel", "core", "react", "compose", "coroutines")
-includeSubs("viewmodel-test", "viewmodel/test", "core", "expect")
+includeSubs("live", "mvivm/live", "core", "react", "compose", "coroutines")
+includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "compose", "coroutines")
+includeSubs("viewmodel-test", "mvivm/viewmodel/test", "core", "expect")
+
+includeSubs("identifier", "identifier", "core", "generators")
+
+includeSubs("color", "aesthetics/color", "core", "css", "compose")
+includeSubs("theme", "aesthetics/theme", "core", "css", "compose", "react")
+includeSubs("reakt", "reakt", "core", "web", "icons")
+
+includeSubs("kash", "finance/kash", "core")
+includeSubs("payments-requests", "finance/payments/requests", "core")

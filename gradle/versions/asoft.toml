@@ -1,11 +1,13 @@
 [versions]
-mvivm = "0.1.30"
+stdlib = "0.2.0"
 foundation = "1.4.40"
 
 [libraries]
 expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }
 expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "foundation" }
+kotlinx-browser = { module = "tz.co.asoft:kotlinx-browser", version.ref = "foundation" }
 kotlinx-collections-atomic = { module = "tz.co.asoft:kotlinx-collections-atomic", version.ref = "foundation" }
+kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }
 kotlinx-coroutines-test = { module = "tz.co.asoft:kotlinx-coroutines-test", version.ref = "foundation" }
 logging-console = { module = "tz.co.asoft:logging-console", version.ref = "foundation" }
 

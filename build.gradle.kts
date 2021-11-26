@@ -12,9 +12,15 @@ plugins {
 }
 
 allprojects {
+    repositories {
+        mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        google()
+    }
+
     afterEvaluate {
         group = "tz.co.asoft"
-        version = asoft.versions.mvivm.get()
+        version = asoft.versions.stdlib.get()
     }
 }
 
@@ -33,7 +39,7 @@ val prepareChangelog by tasks.creating {
 }
 
 deployToSonatype {
-    version = asoft.versions.mvivm.get()
+    version = asoft.versions.stdlib.get()
 }
 
 val beginDeploymentPipeline by tasks.creating {
