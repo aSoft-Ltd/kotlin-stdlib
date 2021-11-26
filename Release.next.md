@@ -1,2 +1,1 @@
-- Downgraded to kotlin 1.5.31 from 1.6.0
-- Upgraded asoft foundation to 1.4.40 from 1.4.30
+- Initial release of the stdlib
