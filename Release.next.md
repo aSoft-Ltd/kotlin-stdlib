@@ -1,1 +1,2 @@
 - Initial release of the stdlib
+- Fixed failing CI https://github.com/aSoft-Ltd/kotlin-stdlib/runs/4335876602?check_suite_focus=true

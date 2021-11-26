@@ -1,9 +1,11 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import kash.Currency;
 import kash.Money;
-import org.junit.Test;
 
 import static kash.MoneyBuilders.*;
-import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class MoneyJavaTest {
 

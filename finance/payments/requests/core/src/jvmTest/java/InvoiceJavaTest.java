@@ -1,5 +1,5 @@
 import payments.requests.Invoice;
-import payments.requests.PaymentRequest;
+import payments.requests.Header;
 import payments.requests.Tax;
 import payments.requests.TaxAgency;
 import kash.Currency;
@@ -32,7 +32,7 @@ public class InvoiceJavaTest {
         var sender = TestUtils.makeSender(address);
         var receiver = TestUtils.makeReceiver(address);
         var createdOn = new LocalDate(2021, 1, 1);
-        var header = new PaymentRequest.Header(sender, receiver, Currency.TZS, createdOn);
+        var header = new Header(sender, receiver, Currency.TZS, createdOn);
         var body = TestUtils.makeBody();
         var invoice = new Invoice(TestUtils.UNSET, header, body);
         System.out.println(invoice);

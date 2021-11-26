@@ -1,3 +1,4 @@
+@file:JsExport
 package payments.requests
 
 import kotlinx.collections.interoperable.List
@@ -6,7 +7,6 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
-@JsExport
 @Serializable
 sealed class LineItem : Calculable {
     abstract val tax: Tax

@@ -1,6 +1,7 @@
 package identifier
 
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @JsExport
 object EmailGenerator {
@@ -16,6 +17,7 @@ object EmailGenerator {
         "microsoft.com"
     )
 
+    @JsName("generateForName")
     fun generateFor(name: Name): Email {
         val (first, last) = if ((1..10).random() > 5) name.first to name.last else name.last to name.first
         val identity = "$first${if ((1..10).random() > 5) "." else ""}$last"
@@ -27,5 +29,6 @@ object EmailGenerator {
 
     fun random(): Email = generateFor(NameGenerator.random())
 
-    fun random(size: Int): List<Email> = List(size) { random() }
+    @JsName("randomWithSizeOf")
+    fun random(size: Int): Array<Email> = Array(size) { random() }
 }
