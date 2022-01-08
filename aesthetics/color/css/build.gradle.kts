@@ -21,7 +21,10 @@ kotlin {
     }
 }
 
+dependencies {
+    commonMainApi(enforcedPlatform(kotlinw.bom))
+}
+
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
-    description = "A platform agnostic color library for css"
+    version = asoft.versions.stdlib.get(), description = "A platform agnostic color library for css"
 )

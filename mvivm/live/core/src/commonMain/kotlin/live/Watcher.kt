@@ -1,12 +1,11 @@
+@file:JsExport
+
 package live
 
 import kotlin.js.JsExport
-import kotlin.js.JsName
 
-@JsExport
 class Watcher<T> internal constructor(
-    internal val callable: (T) -> Unit,
-    private val container: MutableList<Watcher<T>>
+    internal val callable: (T) -> Unit, private val container: MutableList<Watcher<T>>
 ) {
     fun stop() = container.remove(this)
 }

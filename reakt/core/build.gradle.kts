@@ -4,6 +4,10 @@ plugins {
     signing
 }
 
+dependencies {
+    api(enforcedPlatform(kotlinw.bom))
+}
+
 kotlin {
     js(IR) { library() }
 
@@ -11,7 +15,7 @@ kotlin {
         val main by getting {
             dependencies {
                 api(kotlinx.coroutines.core)
-                api(kotlinw.react)
+                api(kotlinw.react.old)
                 api(kotlinw.styled)
             }
         }
@@ -19,6 +23,5 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
-    description = "A react wrapper tool library for kotlin-react"
+    version = asoft.versions.stdlib.get(), description = "A react wrapper tool library for kotlin-react"
 )

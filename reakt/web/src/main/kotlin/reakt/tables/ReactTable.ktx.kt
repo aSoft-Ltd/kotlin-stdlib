@@ -1,6 +1,6 @@
 package reakt
 
-import kotlinext.js.jsObject
+import kotlinext.js.jso
 import kotlinext.js.require
 import kotlinx.css.*
 import react.*
@@ -16,7 +16,7 @@ fun <D> Column<D>.access(trans: (D) -> Any) {
     accessor = trans
 }
 
-inline fun <D> column(name: String, builder: Column<D>.() -> Unit): Column<D> = jsObject {
+inline fun <D> column(name: String, builder: Column<D>.() -> Unit): Column<D> = jso {
     Header = name
     foldable = true
     onFilter { key, rowContent -> rowContent.contains(key, ignoreCase = true) }

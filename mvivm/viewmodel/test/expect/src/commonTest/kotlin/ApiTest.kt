@@ -1,11 +1,10 @@
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import viewmodel.CounterViewModel
 import viewmodel.CounterViewModel.Intent
 import viewmodel.CounterViewModel.State
 import viewmodel.expect
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
@@ -42,24 +41,6 @@ class ApiTest {
             vm.expect(Intent.CountUp(by = 1)).toBeIn(State(1))
             vm.expect(Intent.CountDown(by = 2)).toBeIn(State(-1))
             vm.expect(Intent.CountDown(by = -1)).toBeIn(State(0))
-        }
-        println("Took ${time.inWholeMilliseconds} milli seconds")
-    }
-
-    @OptIn(ExperimentalTime::class)
-    @Test
-    @Ignore
-    fun should_take_500_second_to_build() = runTest {
-        val vm = CounterViewModel(500)
-        val time = measureTime {
-            coroutineScope {
-                launch { vm.expect(Intent.CountUp(by = 1)) }
-
-                launch { vm.expect(Intent.CountDown(by = 2)) }
-
-                launch { vm.expect(Intent.CountDown(by = -1)) }
-                expect(vm).toBeIn(State(0))
-            }
         }
         println("Took ${time.inWholeMilliseconds} milli seconds")
     }

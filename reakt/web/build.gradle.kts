@@ -4,6 +4,10 @@ plugins {
     signing
 }
 
+dependencies {
+    api(enforcedPlatform(kotlinw.bom))
+}
+
 kotlin {
     js(IR) { library() }
 
@@ -13,7 +17,8 @@ kotlin {
                 api(project(":reakt-core"))
                 api(project(":theme-react"))
                 api(project(":reakt-icons"))
-                api(kotlinw.router)
+                api(kotlinw.react.dom.old)
+                api(kotlinw.router.dom)
                 api(asoft.kotlinx.browser)
                 api(kotlinw.css)
                 api(npm("react-table", "6.10.3"))
@@ -25,6 +30,5 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
-    description = "A react wrapper tool library for kotlin-react"
+    version = asoft.versions.stdlib.get(), description = "A react wrapper tool library for kotlin-react"
 )

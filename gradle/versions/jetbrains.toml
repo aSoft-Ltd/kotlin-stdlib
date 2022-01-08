@@ -1,8 +1,8 @@
 [versions]
-kotlin = "1.5.31"
-compose = "1.0.0-rc4"
+kotlin = "1.6.10"
+compose = "1.0.1"
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-js = { id = "org.jetbrains.kotlin.js", version.ref = "kotlin" }
-compose = { id = "org.jetbrains.compose", version.ref= "compose" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }

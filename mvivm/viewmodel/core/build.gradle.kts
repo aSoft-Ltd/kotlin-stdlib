@@ -9,7 +9,7 @@ kotlin {
     android { library() }
     jvm { library() }
     js(IR) { library() }
-    val nativeTargets = nativeTargets(true)
+    val nativeTargets = darwinTargets(true)
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -68,6 +68,5 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
-    description = "A multiplatfrom library for authoring viewmodel in an MVIVM architecture"
+    version = asoft.versions.stdlib.get(), description = "A multiplatfrom library for authoring viewmodel in an MVIVM architecture"
 )

@@ -31,6 +31,12 @@ kotlin {
                 implementation(compose.runtime)
             }
         }
+
+        val androidMain by getting {
+            dependencies {
+                api(androidx.lifecycle.viewmodel.compose)
+            }
+        }
     }
 }
 

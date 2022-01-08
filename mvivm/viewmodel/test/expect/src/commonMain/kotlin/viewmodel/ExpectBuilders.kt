@@ -5,7 +5,6 @@ package viewmodel
 import kotlinx.collections.atomic.mutableAtomicListOf
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import kotlin.jvm.JvmName
 

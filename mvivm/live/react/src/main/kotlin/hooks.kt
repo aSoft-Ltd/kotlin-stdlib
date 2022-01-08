@@ -6,8 +6,8 @@ import react.*
 fun <S> useLive(live: Live<S>): S {
     var state by useState(live.value)
     useEffectOnce {
-        val listener = live.watch { state = it }
-        cleanup { listener.stop() }
+        val watcher = live.watch { state = it }
+        cleanup { watcher.stop() }
     }
     return state
 }

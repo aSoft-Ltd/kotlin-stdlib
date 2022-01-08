@@ -4,13 +4,17 @@ plugins {
     signing
 }
 
+dependencies {
+    api(enforcedPlatform(kotlinw.bom))
+}
+
 kotlin {
     js(IR) { browserLib() }
 
     sourceSets {
         val main by getting {
             dependencies {
-                api(kotlinw.react)
+                api(kotlinw.react.old)
                 api(npm("react-icons", "3.10.0"))
             }
         }

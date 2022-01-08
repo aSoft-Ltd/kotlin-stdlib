@@ -7,7 +7,7 @@ plugins {
 kotlin {
     jvm { library() }
     js(IR) { library() }
-    nativeTargets(true)
+    darwinTargets(true)
     sourceSets {
         val commonMain by getting {
             dependencies {

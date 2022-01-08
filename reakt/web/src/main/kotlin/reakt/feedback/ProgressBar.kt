@@ -1,6 +1,5 @@
 package reakt
 
-import kotlinext.js.jsObject
 import kotlinx.coroutines.*
 import kotlinx.css.*
 import kotlinx.css.properties.boxShadowInset

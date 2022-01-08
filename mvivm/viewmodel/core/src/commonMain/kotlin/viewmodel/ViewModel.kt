@@ -12,12 +12,11 @@ import kotlin.jvm.JvmOverloads
 
 @JsExport
 abstract class ViewModel<in I, S> @JvmOverloads constructor(
-    initialState: S,
-    config: ViewModelConfig = ViewModelConfig()
+    initialState: S, config: ViewModelConfig = ViewModelConfig()
 ) : PlatformViewModel() {
     val logger = config.logger
     val ui: Live<S> = Live(initialState)
-    open val coroutineScope by lazy(config.scopeBuilder)
+    val coroutineScope by lazy(config.scopeBuilder)
 
     init {
         ui.watch { log("State at ${it?.toDetailedString}") }

@@ -7,7 +7,7 @@ plugins {
 kotlin {
     jvm { library() }
     js(IR) { library() }
-    nativeTargets(false)
+    nativeTargets(true)
     sourceSets {
         val commonTest by getting {
             dependencies {

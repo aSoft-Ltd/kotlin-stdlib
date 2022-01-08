@@ -4,13 +4,17 @@ plugins {
     signing
 }
 
+dependencies {
+    api(enforcedPlatform(kotlinw.bom))
+}
+
 kotlin {
     js(IR) { browserLib() }
     sourceSets {
         val main by getting {
             dependencies {
                 api(project(":live-core"))
-                api(kotlinw.react)
+                api(kotlinw.react.core)
             }
         }
         val test by getting {
@@ -22,6 +26,5 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
-    description = "An extension of the Live<T> targeted for react"
+    version = asoft.versions.stdlib.get(), description = "An extension of the Live<T> targeted for react"
 )

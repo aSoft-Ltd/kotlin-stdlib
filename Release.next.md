@@ -1,2 +1,3 @@
-- Initial release of the stdlib
-- Fixed failing CI https://github.com/aSoft-Ltd/kotlin-stdlib/runs/4335876602?check_suite_focus=true
+- Removed ViewModel linux targets coz it lacks the main dispatcher
+- Updated to kotlin 1.6.10
+- Updated to use kotlin wrappers bom

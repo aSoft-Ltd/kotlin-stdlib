@@ -1,8 +1,7 @@
+@file:JsExport
+
 package live
 
-import kotlin.js.JsExport
-
-@JsExport
 actual class Live<S> actual constructor(state: S) {
     actual var value: S = state
         set(value) {

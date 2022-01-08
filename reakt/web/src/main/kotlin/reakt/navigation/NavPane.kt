@@ -60,8 +60,8 @@ private fun RBuilder.menu(props: NavPaneProps, navMenu: NavMenu) = ThemeConsumer
     NavLink {
         attrs {
             to = navMenu.link
-            exact = true
-            strict = true
+//            exact = true
+//            strict = true
         }
         styledDiv {
             css {

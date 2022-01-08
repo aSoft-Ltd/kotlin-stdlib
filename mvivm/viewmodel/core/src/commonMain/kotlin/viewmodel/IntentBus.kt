@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.collect
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
-@JsExport
 open class IntentBus<I> @JvmOverloads constructor(
     val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 ) {
@@ -21,7 +20,7 @@ open class IntentBus<I> @JvmOverloads constructor(
     }
 
     private suspend fun collect(collector: suspend (I) -> Unit) {
-        INTENT_BUS.collect(collector)
+        INTENT_BUS.collect { collector(it) }
     }
 
     fun ViewModel<I, *>.observeIntentBus() = try {

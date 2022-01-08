@@ -1,22 +1,21 @@
 package reakt
 
 import react.RBuilder
+import react.router.Route
+import react.router.Routes
 import react.router.dom.BrowserRouter
-import react.router.dom.Redirect
-import react.router.dom.Route
-import react.router.dom.Switch
 
 fun RBuilder.Website(pages: List<WebPage>) = BrowserRouter {
-    Switch {
+    Routes {
         for (page in pages) Route {
             attrs {
-                path = arrayOf(page.route)
-                exact = true
-                strict = true
-                render = { props -> with(page) { render(props) } }
+                path = page.route
+//                exact = true
+//                strict = true
+                children = page.render(this)
             }
         }
-        Redirect { attrs.to = "/" }
+//        Redirect { attrs.to = "/" }
     }
 }
 

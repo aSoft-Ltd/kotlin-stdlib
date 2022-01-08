@@ -1,6 +1,6 @@
 package reakt
 
-import kotlinext.js.jsObject
+import kotlinext.js.jso
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -66,7 +66,7 @@ private val Audio = fc<AudioProps> { props ->
 /**
  * @param volume - [0..1], default: 0.5
  */
-fun RBuilder.Audio(src: String, volume: Double = 0.5) = child(Audio, jsObject<AudioProps>().also {
+fun RBuilder.Audio(src: String, volume: Double = 0.5) = child(Audio, jso<AudioProps>().also {
     it.src = src
     it.volume = volume
 }) {}
