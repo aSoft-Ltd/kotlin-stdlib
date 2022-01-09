@@ -4,10 +4,6 @@ plugins {
     signing
 }
 
-dependencies {
-    api(enforcedPlatform(kotlinw.bom))
-}
-
 kotlin {
     js(IR) { library() }
 

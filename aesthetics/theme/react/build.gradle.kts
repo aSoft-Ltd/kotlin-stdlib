@@ -4,10 +4,6 @@ plugins {
     signing
 }
 
-dependencies {
-    api(enforcedPlatform(kotlinw.bom))
-}
-
 kotlin {
     js(IR) { browserLib() }
     sourceSets {
@@ -21,6 +17,5 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
-    description = "A theme engine for kotlin/react"
+    version = asoft.versions.stdlib.get(), description = "A theme engine for kotlin/react"
 )
