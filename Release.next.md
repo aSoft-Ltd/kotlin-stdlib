@@ -1,4 +1,3 @@
-- Migrate kotlinx-coroutines to the kotlinx repository
-- Removed the useViewModel and viewModel hooks
-- Migrated versions to gradle/versions/*.toml
-- Removed kotlinx implementations
+- Removed ViewModel linux targets coz it lacks the main dispatcher
+- Updated to kotlin 1.6.10
+- Updated to use kotlin wrappers bom

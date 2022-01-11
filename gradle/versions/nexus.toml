@@ -1,7 +1,5 @@
 [versions]
-staging = "0.22.0"
 publish = "1.1.0"
 
 [plugins]
-staging = { id = "io.codearte.nexus-staging", version.ref = "staging" }
 publish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "publish" }
