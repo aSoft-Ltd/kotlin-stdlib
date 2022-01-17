@@ -22,7 +22,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(project(":viewmodel-test-expect"))
-                implementation(asoft.kotlinx.coroutines.test)
+                implementation(kotlinx.coroutines.test)
                 implementation(asoft.expect.coroutines)
             }
         }

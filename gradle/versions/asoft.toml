@@ -1,6 +1,6 @@
 [versions]
-stdlib = "0.2.10"
-foundation = "1.4.50"
+stdlib = "0.2.20"
+foundation = "1.4.60"
 
 [libraries]
 expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }
@@ -8,7 +8,6 @@ expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "f
 kotlinx-browser = { module = "tz.co.asoft:kotlinx-browser", version.ref = "foundation" }
 kotlinx-collections-atomic = { module = "tz.co.asoft:kotlinx-collections-atomic", version.ref = "foundation" }
 kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }
-kotlinx-coroutines-test = { module = "tz.co.asoft:kotlinx-coroutines-test", version.ref = "foundation" }
 logging-console = { module = "tz.co.asoft:logging-console", version.ref = "foundation" }
 
 [plugins]

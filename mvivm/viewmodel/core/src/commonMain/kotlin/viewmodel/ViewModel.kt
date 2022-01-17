@@ -1,20 +1,22 @@
+@file:JsExport
+
 package viewmodel
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import live.Live
-import logging.Logger
-import logging.logger
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
-@JsExport
 abstract class ViewModel<in I, S> @JvmOverloads constructor(
     initialState: S, config: ViewModelConfig = ViewModelConfig()
 ) : PlatformViewModel() {
-    val logger = config.logger
+    val logger = config.logger.with(
+        "Source" to this::class.simpleName
+    )
     val ui: Live<S> = Live(initialState)
     val coroutineScope by lazy(config.scopeBuilder)
 

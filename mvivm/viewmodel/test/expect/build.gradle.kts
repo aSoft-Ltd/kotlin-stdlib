@@ -13,7 +13,7 @@ kotlin {
             dependencies {
                 api(project(":viewmodel-test-core"))
                 api(asoft.expect.coroutines)
-                api(asoft.kotlinx.coroutines.test)
+                api(kotlinx.coroutines.test)
                 api(asoft.kotlinx.collections.atomic)
             }
         }

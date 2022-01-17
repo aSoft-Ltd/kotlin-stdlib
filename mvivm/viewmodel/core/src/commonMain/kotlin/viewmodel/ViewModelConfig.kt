@@ -12,7 +12,7 @@ import kotlin.jvm.JvmSynthetic
 
 interface ViewModelConfig {
     val scopeBuilder: () -> CoroutineScope
-    val logger: Logger?
+    val logger: Logger
 
     companion object {
         @JvmField

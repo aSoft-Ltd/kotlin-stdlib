@@ -3,23 +3,16 @@
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import logging.ConsoleAppender
-import logging.Logging
+import logging.Logger
 import logging.TodoViewModel
 import logging.TodoViewModel.Intent
 import viewmodel.ViewModelConfig
 import kotlin.test.Test
 
 class ViewModelLogging {
-
-    init {
-        Logging.init(ConsoleAppender())
-    }
-
-    val config = ViewModelConfig(
-        builder = { CoroutineScope(SupervisorJob()) }
-    )
+    val config = ViewModelConfig(logger = Logger(ConsoleAppender()), builder = { CoroutineScope(SupervisorJob()) })
 
     @Test
     fun should_print_logging_output() = runTest {

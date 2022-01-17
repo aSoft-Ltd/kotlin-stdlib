@@ -2,9 +2,7 @@ import CounterViewModel.Intent
 import CounterViewModel.State
 import expect.expect
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runTest
-import logging.ConsoleAppender
-import logging.Logging
+import kotlinx.coroutines.test.runTest
 import viewmodel.ViewModel
 import viewmodel.expect
 import kotlin.test.Test
@@ -14,11 +12,6 @@ import kotlin.test.assertEquals
  * Give a [ViewModel] [CounterViewModel]
  */
 class ViewModelIntentTest {
-
-    init {
-        Logging.init(ConsoleAppender())
-    }
-
     @Test
     fun state_should_follow_intents() = runTest {
         val vm = CounterViewModel()
