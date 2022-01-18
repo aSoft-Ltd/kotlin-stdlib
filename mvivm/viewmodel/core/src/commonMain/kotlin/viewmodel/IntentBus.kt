@@ -23,7 +23,7 @@ open class IntentBus<I> @JvmOverloads constructor(
         INTENT_BUS.collect { collector(it) }
     }
 
-    fun ViewModel<I, *>.observeIntentBus() = try {
+    protected fun ViewModel<I, *>.observeIntentBus() = try {
         coroutineScope.launch(context = exceptionHandler) { collect { post(it) } }
     } catch (err: Throwable) {
         mainDispatcherMissingHandler(err)
