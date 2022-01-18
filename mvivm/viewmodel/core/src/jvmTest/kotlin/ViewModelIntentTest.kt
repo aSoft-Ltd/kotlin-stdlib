@@ -20,7 +20,7 @@ class ViewModelIntentTest {
         vm.expect(Intent.CountUp(1)).toGoThrough(State(1))
 
         vm.expect(Intent.CountUp(2)).toGoThrough(State(3))
-        delay(10)
+        delay(10) // okay
         assertEquals(3, vm.countState)
     }
 }
