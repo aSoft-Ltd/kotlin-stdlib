@@ -36,6 +36,7 @@ dependencies {
 |ViewModel Version|Kotlin Version|
 |-----------------|--------------|
 |0.0.93           | 1.5.10       |
+|0.2.21           | 1.6.10       |
 
 [badge-maven]: https://img.shields.io/maven-central/v/tz.co.asoft/viewmodel-core/0.0.93?style=flat
 
