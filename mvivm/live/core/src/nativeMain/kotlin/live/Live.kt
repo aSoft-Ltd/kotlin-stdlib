@@ -14,7 +14,9 @@ actual class Live<S> actual constructor(state: S) {
 
     private val watchers = mutableAtomicListOf<Watcher<S>>()
 
-    actual fun watch(callable: (state: S) -> Unit): Watcher<S> = watch(watchers, callable)
+    actual fun watch(ignoreImmediateValue: Boolean, callable: (state: S) -> Unit): Watcher<S> = watch(ignoreImmediateValue, watchers, callable)
+
+    fun watch(callable: (state: S) -> Unit): Watcher<S> = watch(ignoreImmediateValue = false, watchers, callable)
 
     actual fun stop(watcher: Watcher<S>) = watchers.remove(watcher)
 
