@@ -3,13 +3,14 @@ import expect.toBe
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.runTest
 import live.Live
+import live.MutableLive
 import live.asFlow
 import kotlin.test.Test
 
 class AsFlowTest {
     @Test
     fun should_wait_for_values() = runTest {
-        val live = Live(-1)
+        val live = MutableLive(-1)
         val scope = CoroutineScope(SupervisorJob())
         launch {
             repeat(4) {
