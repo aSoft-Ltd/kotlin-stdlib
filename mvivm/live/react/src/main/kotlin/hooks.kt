@@ -1,6 +1,5 @@
 @file:JsExport
 
-import live.Live
 import react.*
 
 fun <S> useLive(live: Live<S>): S {

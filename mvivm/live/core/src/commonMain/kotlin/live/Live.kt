@@ -1,8 +1,16 @@
 package live
 
-expect class Live<S>(state: S) {
-    var value: S
-    fun watch(ignoreImmediateValue: Boolean = false, callable: (state: S) -> Unit): Watcher<S>
-    fun stop(watcher: Watcher<S>): Boolean
+expect interface Live<out S> {
+
+    companion object {
+        operator fun <S> invoke(value: S): Live<S>
+    }
+
+    val value: S
+
+    fun watch(ignoreImmediateValue: Boolean, callable: (state: S) -> Unit): Watcher<*>
+
+    fun watch(callable: (state: S) -> Unit): Watcher<*>
+
     fun stopAll()
 }

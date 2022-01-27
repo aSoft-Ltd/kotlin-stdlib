@@ -2,7 +2,6 @@ import expect.expect
 import expect.toBe
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.flow.collect
 import live.Live
 import live.asFlow
 import kotlin.test.Test

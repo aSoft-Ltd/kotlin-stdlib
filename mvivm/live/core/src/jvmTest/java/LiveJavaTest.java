@@ -1,6 +1,7 @@
-import live.Live;
-import live.Watcher;
 import org.junit.jupiter.api.Test;
+
+import live.MutableLive;
+import live.Watcher;
 
 public class LiveJavaTest {
 
@@ -10,12 +11,12 @@ public class LiveJavaTest {
 
     @Test
     public void should_have_a_valid_syntax() {
-        Live<Integer> liveInt = new Live<>(1);
-        Watcher<Integer> watcher1 = liveInt.watch(x -> print(1, x));
+        MutableLive<Integer> liveInt = MutableLive.of(1);
+        Watcher<?> watcher1 = liveInt.watch(x -> print(1, x));
         liveInt.setValue(2);
         liveInt.setValue(3);
 
-        Watcher<Integer> watcher2 = liveInt.watch(x -> {
+        Watcher<?> watcher2 = liveInt.watch(x -> {
             print(2, x);
         });
 
