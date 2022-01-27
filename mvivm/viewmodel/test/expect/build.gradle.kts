@@ -14,7 +14,6 @@ kotlin {
                 api(project(":viewmodel-test-core"))
                 api(asoft.expect.coroutines)
                 api(kotlinx.coroutines.test)
-                api(asoft.kotlinx.collections.atomic)
             }
         }
     }
