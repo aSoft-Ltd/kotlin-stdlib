@@ -20,9 +20,6 @@ kotlin {
 
         val nativeMain by creating {
             dependsOn(commonMain)
-            dependencies {
-                api(asoft.kotlinx.collections.atomic)
-            }
         }
 
         val nativeTest by creating {
