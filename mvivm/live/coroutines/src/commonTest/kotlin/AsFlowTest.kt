@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 import live.Live
 import live.MutableLive
 import live.asFlow
+import live.value
 import kotlin.test.Test
 
 class AsFlowTest {

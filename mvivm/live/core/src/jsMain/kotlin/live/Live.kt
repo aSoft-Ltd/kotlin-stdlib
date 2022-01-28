@@ -7,15 +7,15 @@ import kotlin.js.JsExport
 
 actual interface Live<out S> {
     actual companion object {
+        @JsName("_init_")
         actual operator fun <S> invoke(value: S): Live<S> = MutableLive(value)
     }
 
-    actual val value: S
+    actual fun getValue(): S
 
-    @JsName("watchIgnoringImmediateValue")
-    actual fun watch(ignoreImmediateValue: Boolean, callable: (state: S) -> Unit): Watcher<*>
+    actual fun peek(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 
-    actual fun watch(callable: (state: S) -> Unit): Watcher<*>
+    actual fun watch(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 
     actual fun stopAll()
 }

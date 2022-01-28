@@ -10,20 +10,17 @@ actual interface Live<out S> {
         fun <S> of(value: S) = invoke(value)
     }
 
-    actual val value: S
+    actual fun getValue(): S
 
     @JvmSynthetic
-    actual fun watch(ignoreImmediateValue: Boolean, callable: (state: S) -> Unit): Watcher<*>
+    actual fun peek(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 
-    fun watch(
-        ignoreImmediateValue: Boolean,
-        callable: Callback<@UnsafeVariance S>
-    ): Watcher<*>
+    fun peek(callback: Callback<@UnsafeVariance S>): Watcher<@UnsafeVariance S>
 
     @JvmSynthetic
-    actual fun watch(callable: (state: S) -> Unit): Watcher<*>
+    actual fun watch(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 
-    fun watch(callable: Callback<@UnsafeVariance S>): Watcher<*>
+    fun watch(callback: Callback<@UnsafeVariance S>): Watcher<@UnsafeVariance S>
 
     actual fun stopAll()
 }

@@ -2,4 +2,4 @@ package live
 
 import useLive
 
-fun <S> Live<S>.asState() = useLive(this)
+inline fun <S> Live<S>.asState() = useLive(this)

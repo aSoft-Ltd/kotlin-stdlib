@@ -1,0 +1,9 @@
+@file:JsExport
+
+package live
+
+import kotlin.js.JsExport
+
+fun <S> mutableLiveOf(value: S): MutableLive<S> = MutableLiveImpl(value)
+
+fun <S> liveOf(value: S): Live<S> = MutableLiveImpl(value)

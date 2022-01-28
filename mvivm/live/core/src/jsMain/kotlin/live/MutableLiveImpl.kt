@@ -1,7 +1,7 @@
 package live
 
 internal actual class MutableLiveImpl<S> actual constructor(state: S) : MutableLive<S> {
-    override var value: S = state
+    private var value: S = state
         set(value) {
             field = value
             for (watcher in watchers) watcher.callable(value)
@@ -9,9 +9,15 @@ internal actual class MutableLiveImpl<S> actual constructor(state: S) : MutableL
 
     private val watchers = mutableListOf<Watcher<S>>()
 
-    override fun watch(ignoreImmediateValue: Boolean, callable: (state: S) -> Unit): Watcher<S> = watch(ignoreImmediateValue, watchers, callable)
+    override fun setValue(value: S) {
+        this.value = value
+    }
 
-    override fun watch(callable: (state: S) -> Unit): Watcher<S> = watch(ignoreImmediateValue = false, watchers, callable)
+    override fun getValue(): S = value
+
+    override fun peek(callback: (state: S) -> Unit): Watcher<S> = watch(ignoreImmediateValue = true, watchers, callback)
+
+    override fun watch(callback: (state: S) -> Unit): Watcher<S> = watch(ignoreImmediateValue = false, watchers, callback)
 
     override fun stopAll() = watchers.clear()
 }

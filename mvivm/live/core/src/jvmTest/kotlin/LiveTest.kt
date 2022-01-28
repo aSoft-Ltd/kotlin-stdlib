@@ -1,6 +1,5 @@
 import expect.expect
-import live.Live
-import live.MutableLive
+import live.*
 import kotlin.test.Test
 
 class LiveTestJvm {

@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import live.value
 
 class CounterViewModel(val delay: Long) : ViewModel<Intent, State>(State(0)) {
 

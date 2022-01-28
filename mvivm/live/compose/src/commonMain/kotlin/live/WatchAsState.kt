@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 fun <S> Live<S>.watchAsState(): S {
     var state by remember { mutableStateOf(value) }
     DisposableEffect(this) {
-        val watcher = watch(ignoreImmediateValue = true) { state = it }
+        val watcher = peek { state = it }
         onDispose { watcher.stop() }
     }
     return state

@@ -1,4 +1,5 @@
 import live.MutableLive
+import live.value
 import kotlin.test.Test
 
 class LiveTest {
