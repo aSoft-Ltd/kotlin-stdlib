@@ -2,15 +2,12 @@ package live
 
 actual interface Live<out S> {
 
-    actual companion object {
-        @JvmSynthetic
-        actual operator fun <S> invoke(value: S): Live<S> = MutableLive(value)
-
+    companion object {
         @JvmStatic
-        fun <S> of(value: S) = invoke(value)
+        fun <S> of(value: S): Live<S> = MutableLiveImpl(value)
     }
 
-    actual fun getValue(): S
+    actual val value: S
 
     @JvmSynthetic
     actual fun peek(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>

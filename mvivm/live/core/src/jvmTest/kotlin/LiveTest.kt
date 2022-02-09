@@ -5,7 +5,7 @@ import kotlin.test.Test
 class LiveTestJvm {
     @Test
     fun should_have_a_valid_syntax() {
-        val liveInt = MutableLive(1)
+        val liveInt = mutableLiveOf(1)
         val readableLive: Live<Int> = liveInt
         var counter1 = 0
         val watcher1 = readableLive.watch {

@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import live.MutableLive;
 import live.Watcher;
+import live.LiveBuildersKt.*;
 
 public class LiveJavaTest {
 

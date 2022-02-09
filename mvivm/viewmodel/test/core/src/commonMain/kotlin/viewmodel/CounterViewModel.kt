@@ -1,12 +1,10 @@
 package viewmodel
 
-import viewmodel.CounterViewModel.Intent
-import viewmodel.CounterViewModel.State
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import live.value
+import viewmodel.CounterViewModel.Intent
+import viewmodel.CounterViewModel.State
 
 class CounterViewModel(val delay: Long) : ViewModel<Intent, State>(State(0)) {
 

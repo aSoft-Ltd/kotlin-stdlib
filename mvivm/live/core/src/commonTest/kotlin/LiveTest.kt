@@ -1,11 +1,11 @@
 import live.MutableLive
-import live.value
+import live.mutableLiveOf
 import kotlin.test.Test
 
 class LiveTest {
     @Test
     fun should_have_a_valid_syntax() {
-        val liveInt = MutableLive(1)
+        val liveInt = mutableLiveOf(1)
         val watcher1 = liveInt.watch {
             println("Watcher 1: $it")
         }

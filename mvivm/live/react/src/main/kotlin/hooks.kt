@@ -1,8 +1,8 @@
 @file:JsExport
 
-import react.*
 import live.Live
-import live.value
+import react.useEffectOnce
+import react.useState
 
 fun <S> useLive(live: Live<S>): S {
     var state by useState(live.value)

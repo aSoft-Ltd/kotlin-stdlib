@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import live.Live
 import live.MutableLive
+import live.mutableLiveOf
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
@@ -15,7 +16,7 @@ abstract class ViewModel<in I, S> @JvmOverloads constructor(
     val logger = config.logger.with(
         "Source" to this::class.simpleName
     )
-    val ui: MutableLive<S> = MutableLive(initialState)
+    val ui: MutableLive<S> = mutableLiveOf(initialState)
     val coroutineScope by lazy(config.scopeBuilder)
 
     init {

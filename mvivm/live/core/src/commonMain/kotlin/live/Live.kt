@@ -1,18 +1,11 @@
 package live
 
 /**
- * A wrapper around a value that can be watched as it changes
+ * A wrapper around a [value] that can be watched as it changes
  */
 expect interface Live<out S> {
 
-    companion object {
-        operator fun <S> invoke(value: S): Live<S>
-    }
-
-    /**
-     * @return the value of type [S] that is being [watch]ed/[peek]ed [Live]
-     */
-    fun getValue(): S
+    val value: S
 
     /**
      * Watch upcoming values while ignoring the current one be updated via a [callback] about its change
@@ -29,7 +22,7 @@ expect interface Live<out S> {
     fun watch(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 
     /**
-     * Stops all [Watcher]s from watching this [Live] value
+     * Stops all [Watcher]s from watching this [Live] [value]
      */
     fun stopAll()
 }

@@ -1,7 +1,6 @@
 import org.jetbrains.compose.compose
 
 plugins {
-    id("com.android.library")
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("tz.co.asoft.library")
@@ -14,12 +13,7 @@ repositories {
     google()
 }
 
-android {
-    configureAndroid("src/androidMain")
-}
-
 kotlin {
-    android { library() }
     jvm { library() }
     js(IR) { library() }
 

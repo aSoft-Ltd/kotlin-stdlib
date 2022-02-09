@@ -5,13 +5,9 @@ package live
 
 import kotlin.js.JsExport
 
-actual interface Live<out S> {
-    actual companion object {
-        @JsName("_init_")
-        actual operator fun <S> invoke(value: S): Live<S> = MutableLive(value)
-    }
+actual external interface Live<out S> {
 
-    actual fun getValue(): S
+    actual val value: S
 
     actual fun peek(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 

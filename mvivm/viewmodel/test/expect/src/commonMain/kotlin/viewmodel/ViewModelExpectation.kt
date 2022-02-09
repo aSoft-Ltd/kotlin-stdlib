@@ -2,7 +2,6 @@ package viewmodel
 
 import expect.BasicAssertion
 import kotlin.test.assertTrue
-import live.value
 
 class ViewModelExpectation<I, S, V : ViewModel<I, S>>(
     override val value: V

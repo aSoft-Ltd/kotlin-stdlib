@@ -3,7 +3,6 @@ import CounterViewModel.State
 import kotlinx.coroutines.CoroutineScope
 import viewmodel.IntentBus
 import viewmodel.ViewModel
-import live.value
 
 class CounterViewModel : ViewModel<Intent, State>(State(0)) {
 

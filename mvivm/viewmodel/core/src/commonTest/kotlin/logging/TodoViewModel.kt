@@ -2,13 +2,11 @@
 
 package logging
 
-import logging.TodoViewModel.Intent
-import logging.TodoViewModel.State
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import live.value
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import logging.TodoViewModel.Intent
+import logging.TodoViewModel.State
 import viewmodel.ViewModel
 import viewmodel.ViewModelConfig
 import kotlin.jvm.JvmOverloads
