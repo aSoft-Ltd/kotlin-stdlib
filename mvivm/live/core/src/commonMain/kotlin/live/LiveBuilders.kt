@@ -1,8 +1,10 @@
+@file:JvmName("LiveBuilders")
 @file:JsExport
 
 package live
 
 import kotlin.js.JsExport
+import kotlin.jvm.JvmName
 
 fun <S> mutableLiveOf(value: S): MutableLive<S> = MutableLiveImpl(value)
 

@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import live.MutableLive;
 import live.Watcher;
-import live.LiveBuildersKt.*;
 
 public class LiveJavaTest {
 
@@ -20,7 +19,7 @@ public class LiveJavaTest {
         Watcher<?> watcher2 = liveInt.watch(x -> {
             print(2, x);
         });
-        
+
         liveInt.setValue(4);
         liveInt.setValue(5);
 //        liveInt.stop(watcher1)
