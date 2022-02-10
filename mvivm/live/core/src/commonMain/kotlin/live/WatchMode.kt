@@ -1,20 +1,24 @@
-@file:JsExport
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:JsExport @file:Suppress("WRONG_EXPORTED_DECLARATION")
 
 package live
 
 import kotlin.js.JsExport
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 /**
  * A Mode on which one can watch a [Live] object
  */
 sealed class WatchMode {
     companion object {
-        val CASUALLY by lazy { CASUALLY() }
+        @JvmField
+        val CASUALLY = CASUALLY()
 
-        val EAGERLY by lazy { EAGERLY() }
+        @JvmField
+        val EAGERLY = EAGERLY()
 
-        val DEFAULT: WatchMode by lazy { CASUALLY }
+        @JvmField
+        val DEFAULT: WatchMode = CASUALLY
     }
 }
 

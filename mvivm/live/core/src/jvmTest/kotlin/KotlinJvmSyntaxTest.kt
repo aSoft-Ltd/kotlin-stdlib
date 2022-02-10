@@ -2,13 +2,13 @@ import expect.expect
 import live.*
 import kotlin.test.Test
 
-class LiveTestJvm {
+class KotlinJvmSyntaxTest {
     @Test
     fun should_have_a_valid_syntax() {
         val liveInt = mutableLiveOf(1)
         val readableLive: Live<Int> = liveInt
         var counter1 = 0
-        val watcher1 = readableLive.watch {
+        val watcher1 = readableLive.watch(WatchMode.EAGERLY) {
             counter1++
         }
         expect(counter1).toBe(1)
@@ -16,7 +16,7 @@ class LiveTestJvm {
         liveInt.value = 3
         var counter2 = 0
         expect(counter1).toBe(3)
-        val watcher2 = liveInt.watch {
+        val watcher2 = liveInt.watch(WatchMode.EAGERLY) {
             counter2++
         }
         expect(counter2).toBe(1)
