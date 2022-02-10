@@ -1,4 +1,5 @@
 import expect.expect
+import live.WATCH_MODE
 import live.WatchMode
 import live.liveOf
 import live.mutableLiveOf
@@ -20,7 +21,7 @@ class InteroperabilityTest {
         globalThis.live = pLive
         val live = globalThis.live
         var number = 0
-        live.watch(WatchMode.DEFAULT) { int: Int ->
+        live.watch(WATCH_MODE.CASUALLY) { int: Int ->
             number = int
             console.log("Watching: $int")
         }
@@ -39,7 +40,7 @@ class InteroperabilityTest {
         globalThis.live = pLive
         val live = globalThis.live
         var number: Int = 0
-        live.watch(WatchMode.EAGERLY) { int: Int ->
+        live.watch(WATCH_MODE.EAGERLY) { int: Int ->
             number = int
             console.log("Watching")
         }
