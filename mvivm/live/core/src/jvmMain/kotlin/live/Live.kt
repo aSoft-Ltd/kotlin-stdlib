@@ -10,14 +10,11 @@ actual interface Live<out S> {
     actual val value: S
 
     @JvmSynthetic
-    actual fun peek(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
+    actual fun watch(mode: WatchMode, callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 
-    fun peek(callback: Callback<@UnsafeVariance S>): Watcher<@UnsafeVariance S>
+    fun watch(mode: WatchMode, callback: Callback<@UnsafeVariance S>): Watcher<@UnsafeVariance S>
 
-    @JvmSynthetic
-    actual fun watch(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
-
-    fun watch(callback: Callback<@UnsafeVariance S>): Watcher<@UnsafeVariance S>
+    fun watch(callback: Callback<@UnsafeVariance S>): Watcher<@UnsafeVariance S> = watch(WatchMode.DEFAULT, callback)
 
     actual fun stopAll()
 }

@@ -1,4 +1,5 @@
 import expect.expect
+import live.WatchMode
 import live.liveOf
 import live.mutableLiveOf
 import kotlin.test.Test
@@ -6,7 +7,7 @@ import kotlin.test.Test
 class InteroperabilityTest {
 
     @Test
-    fun should_be_able_to_consume_live() {
+    fun should_be_able_to_get_a_live_value() {
         val live = mutableLiveOf(123)
         globalThis.live = live
         val value: Int = globalThis.live.value
@@ -14,12 +15,18 @@ class InteroperabilityTest {
     }
 
     @Test
-    fun should_be_able_to_watch_a_live() {
+    fun should_be_able_to_watch_a_live_casually() {
         val pLive = mutableLiveOf(1234)
         globalThis.live = pLive
         val live = globalThis.live
-        live.watch { int -> console.log("Watching: $int") }
+        var number = 0
+        live.watch(WatchMode.DEFAULT) { int: Int ->
+            number = int
+            console.log("Watching: $int")
+        }
+        expect(number).toBe(0)
         live.value = 456
+        expect(number).toBe(456)
         live.value = 789
 
         val value: Int = live.value
@@ -27,11 +34,16 @@ class InteroperabilityTest {
     }
 
     @Test
-    fun should_be_able_to_peek_a_live() {
+    fun should_be_able_to_watch_a_live_eagerly() {
         val pLive = liveOf(1234)
         globalThis.live = pLive
         val live = globalThis.live
-        live.peek { int -> console.log("Peeking: $int") }
+        var number: Int = 0
+        live.watch(WatchMode.EAGERLY) { int: Int ->
+            number = int
+            console.log("Watching")
+        }
+        expect(number).toBe(1234)
         live.value = 456
         live.value = 789
     }

@@ -8,18 +8,13 @@ expect interface Live<out S> {
     val value: S
 
     /**
-     * Watch upcoming values while ignoring the current one be updated via a [callback] about its change
-     *
-     * @return a [Watcher]
-     */
-    fun peek(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
-
-    /**
      * Watch the value as it changes and be updated via a [callback]
      *
+     * [mode] of how you would like to watch this value. It can be [EAGERLY] ro [CASUALLY]
+     *
      * @return a [Watcher]
      */
-    fun watch(callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
+    fun watch(mode: WatchMode = WatchMode.DEFAULT, callback: (state: S) -> Unit): Watcher<@UnsafeVariance S>
 
     /**
      * Stops all [Watcher]s from watching this [Live] [value]

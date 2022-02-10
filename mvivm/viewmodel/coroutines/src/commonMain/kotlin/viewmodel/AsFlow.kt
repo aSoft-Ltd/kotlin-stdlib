@@ -1,5 +1,5 @@
 package viewmodel
 
-import live.asFlow
+import live.watch
 
-fun <S> ViewModel<*, S>.asFlow() = ui.asFlow()
+fun <S> ViewModel<*, S>.asFlow() = ui.watch()
