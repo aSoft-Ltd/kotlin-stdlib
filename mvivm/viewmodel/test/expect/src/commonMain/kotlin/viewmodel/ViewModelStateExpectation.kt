@@ -26,7 +26,7 @@ class ViewModelStateExpectation<S>(
             """
     
     Expected States : [${L::class.simpleName} | ${R::class.simpleName}]
-    Actual State    : $state
+    Actual State    : ${state!!::class.simpleName}
     =============================================================
 
     """.trimIndent()

@@ -20,7 +20,7 @@ interface ViewModelStateAssertion<S> : BasicExpectation<List<S>> {
 
     fun toGoThrough(vararg states: S) {
         assertEquals(
-            states.toList(), value,
+            states.toList().toString(), value.toString(),
             """
             
         Expected ViewModel State Path : ${states.toList()}

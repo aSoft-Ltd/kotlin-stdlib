@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.callbackFlow
 
-fun <S> Live<S>.watch(mode: WatchMode = WatchMode.DEFAULT): Flow<S> = callbackFlow {
+fun <S> Live<S>.watchAsFlow(mode: WatchMode = WatchMode.EAGERLY): Flow<S> = callbackFlow {
     val watcher = watch(mode) { trySend(it) }
     awaitClose { watcher.stop() }
 }

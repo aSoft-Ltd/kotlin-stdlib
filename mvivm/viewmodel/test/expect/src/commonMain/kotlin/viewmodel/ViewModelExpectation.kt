@@ -1,11 +1,14 @@
 package viewmodel
 
 import expect.BasicAssertion
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 import kotlin.test.assertTrue
 
 class ViewModelExpectation<I, S, V : ViewModel<I, S>>(
     override val value: V
 ) : BasicAssertion<V>(value), ViewModelAssertion<S, V> {
+    @OptIn(ExperimentalContracts::class)
     inline fun <reified E> toBeIn(): E {
         val state = value.ui.value
         assertTrue(

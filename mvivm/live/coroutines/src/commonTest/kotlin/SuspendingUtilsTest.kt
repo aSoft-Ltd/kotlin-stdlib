@@ -78,7 +78,7 @@ class SuspendingUtilsTest {
     fun can_cancel_watcher_by_canceling_job_of_a_casual_watcher() = runTest {
         val live = mutableLiveOf("Stuff 1")
         var stuff = ""
-        val job = watch(live) {
+        val job = watch(live, WatchMode.CASUALLY) {
             stuff = it
         }
         delay(delayTime)
