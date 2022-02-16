@@ -19,7 +19,7 @@ interface ViewModelConfig {
         val DEFAULT_LOGGER = Logger(ConsoleAppender())
 
         @JvmField
-        val DEFAULT_SCOPE = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+        val DEFAULT_SCOPE = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
         @JvmField
         val DEFAULT_SCOPE_BUILDER = { DEFAULT_SCOPE }

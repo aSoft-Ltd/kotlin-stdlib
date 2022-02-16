@@ -1,5 +1,5 @@
 [versions]
-stdlib = "0.2.27"
+stdlib = "0.2.28"
 foundation = "1.4.62"
 
 [libraries]
