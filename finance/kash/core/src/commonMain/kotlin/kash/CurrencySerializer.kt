@@ -19,6 +19,9 @@ object CurrencySerializer : KSerializer<Currency> {
     }
 
     override fun deserialize(decoder: Decoder): Currency {
-        return Currency.valueOf(decoder.decodeString())
+        println("Deserializing")
+        val name = decoder.decodeString()
+        println(name)
+        return Currency.valueOf(name)
     }
 }

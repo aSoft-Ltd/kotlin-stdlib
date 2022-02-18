@@ -45,6 +45,7 @@ open class CodeGenerator : DefaultTask() {
             package $packageName
             
             import kotlin.jvm.JvmSynthetic
+            import kotlin.jvm.JvmStatic
             import kotlin.js.JsExport
             import kotlin.js.JsName
             import kotlinx.serialization.Serializable
@@ -53,8 +54,12 @@ open class CodeGenerator : DefaultTask() {
             sealed class $className(val name: String, val symbol: String, val details: String,val lowestDenomination: Short) {
                 override fun toString() = name
                 companion object {
-                    val values = ${currencies.joinToString(separator = ",", prefix = "arrayOf(", postfix = ")") { it["cc"].toString() }}
-                    fun valueOf(currency: String) = values.first{ it.name == currency }
+                    @JvmStatic
+                    val values by lazy { 
+                        ${currencies.joinToString(separator = ", ", prefix = "arrayOf(", postfix = ")") { it["cc"].toString() }}
+                    }
+                    @JvmStatic
+                    fun valueOf(currency: String) = values.first { it.name == currency }
                 }            
         """.trimIndent()
         )

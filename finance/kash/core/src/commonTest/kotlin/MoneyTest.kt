@@ -1,10 +1,10 @@
 import expect.expect
-import kotlinx.serialization.json.Json
 import kash.Money
 import kash.TZS
 import kash.UGX
 import kash.USD
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -13,7 +13,6 @@ class MoneyTest {
     fun should_equal() {
         val m = 45.TZS
         println(m)
-
         println(Json.encodeToString(Money.serializer(), m))
     }
 
