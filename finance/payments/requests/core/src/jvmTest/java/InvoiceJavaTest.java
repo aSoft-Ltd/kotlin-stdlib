@@ -32,7 +32,7 @@ public class InvoiceJavaTest {
         var sender = TestUtils.makeSender(address);
         var receiver = TestUtils.makeReceiver(address);
         var createdOn = new LocalDate(2021, 1, 1);
-        var header = new Header(sender, receiver, Currency.TZS, createdOn);
+        var header = new Header(sender, receiver, Currency.TZS.INSTANCE, createdOn);
         var body = TestUtils.makeBody();
         var invoice = new Invoice(TestUtils.UNSET, header, body);
         System.out.println(invoice);

@@ -55,6 +55,23 @@ data class Money internal constructor(
 
     }
 
+    operator fun plus(other: Money): Money {
+        if (other.currency != currency) error("Can't add ${currency.name} to ${other.currency.name}")
+        return Money(amount + other.amount, currency)
+    }
+
+    operator fun minus(other: Money): Money {
+        if (other.currency != currency) error("Can't subtract ${currency.name} to ${other.currency.name}")
+        return Money(amount - other.amount, currency)
+    }
+
+    operator fun times(quantity: Number) = Money((amount * quantity.toDouble()).toInt(), currency)
+
+    operator fun div(quantity: Number) = Money((amount / quantity.toDouble()).toInt(), currency)
+
+    @JsName("ratio")
+    operator fun div(other: Money) = MoneyRatio((amount.toDouble() / other.amount), currency, other.currency)
+
     private fun beautify(amount: Double): String {
         if (amount.toString().endsWith(".0")) {
             return amount.toInt().toString()
