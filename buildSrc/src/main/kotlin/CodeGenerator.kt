@@ -35,36 +35,51 @@ open class CodeGenerator : DefaultTask() {
         }
         output.writeText(
             """
-            @file:Suppress("unused")
+            /*
+             * This is a generated document
+             * author of the generator: https://github.com/andylamax
+             */
+            @file:JsExport
+            @file:Suppress("unused","WRONG_EXPORTED_DECLARATION")
             
             package $packageName
             
             import kotlin.jvm.JvmSynthetic
+            import kotlin.js.JsExport
+            import kotlin.js.JsName
+            import kotlinx.serialization.Serializable
             
-            enum class $className(val symbol: String, val details: String,val lowestDenomination: UShort) {${"\n"}
+            @Serializable(with = CurrencySerializer::class)
+            sealed class $className(val name: String, val symbol: String, val details: String,val lowestDenomination: Short) {
+                override fun toString() = name
+                companion object {
+                    val values = ${currencies.joinToString(separator = ",", prefix = "arrayOf(", postfix = ")") { it["cc"].toString() }}
+                    fun valueOf(currency: String) = values.first{ it.name == currency }
+                }            
         """.trimIndent()
         )
+
 
         output.appendText("\n")
         for (entry in currencies) {
             val name = entry["name"]
             output.appendText("\t/**$name*/\n")
-            output.appendText("""${"\t"}${entry["cc"]}("${symbol(entry["symbol"]!!)}","$name",${entry["lowestDenomination"]}u)""")
-            output.appendText(if (currencies.last() == entry) ";" else ",")
+            output.appendText("""${"\t"}object ${entry["cc"]} : $className("${entry["cc"]}","${symbol(entry["symbol"]!!)}","$name",${entry["lowestDenomination"]})""")
+//            output.appendText(if (currencies.last() == entry) ";" else ",")
             output.appendText("\n\n")
         }
         output.appendText(listOf("UInt", "ULong", "Double").joinToString("\n") { type ->
-            val multiplier = "lowestDenomination${if (type.startsWith("U")) "" else ".toShort()"}"
             """
-            |    fun of(amount: $type) = Money((amount * $multiplier).toULong(), this)
+            |    @JsName("of${type}Value")
+            |    fun of(amount: $type) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
             """.trimMargin()
         })
         output.appendText("\n")
         output.appendText(listOf("Int", "Long").joinToString("\n") { type ->
-            val multiplier = "lowestDenomination${if (type.startsWith("U")) "" else ".toShort()"}"
             """
             |    @JvmSynthetic
-            |    fun of(amount: $type) = Money((amount * $multiplier).toULong(), this)
+            |    @JsName("of${type}Value")
+            |    fun of(amount: $type) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
             """.trimMargin()
         })
         output.appendText("\n}")
@@ -72,68 +87,15 @@ open class CodeGenerator : DefaultTask() {
         return currencies
     }
 
-    fun generateMoney() {
-        val output = File(outputDir, "Money.kt")
-        if (!output.exists()) output.createNewFile()
-        output.writeText(
-            """
-            @file:UseSerializers(LongAsStringSerializer::class)
-            
-            package $packageName
-            
-            import kotlinx.serialization.Serializable
-            import kotlinx.serialization.UseSerializers
-            import kotlinx.serialization.builtins.LongAsStringSerializer
-            import kotlin.jvm.JvmStatic
-            import kotlin.jvm.JvmSynthetic
-            import kotlin.math.floor
-
-            @Serializable
-            data class Money internal constructor(
-                /** In the lowest denomination */
-                val amount: ULong,
-                val currency: $className
-            ) {
-               
-                companion object {
-            ${
-                listOf("UInt", "ULong", "Double").joinToString("\n") { type ->
-                    val multiplier = "currency.lowestDenomination${if (type.startsWith("U")) "" else ".toShort()"}"
-                    """
-                    @JvmStatic
-                    fun of(amount: $type, currency: $className) = Money((amount * $multiplier).toULong(), currency)
-                   """
-                }
-            }
-            
-             ${
-                listOf("Int", "Long").joinToString("\n") { type ->
-                    val multiplier = "currency.lowestDenomination${if (type.startsWith("U")) "" else ".toShort()"}"
-                    """
-                    @JvmStatic
-                    @JvmSynthetic
-                    fun of(amount: $type, currency: $className) = Money((amount * $multiplier).toULong(), currency)
-                   """
-                }
-            }
-                }
-                val readableValue get() = amount.toDouble() / currency.lowestDenomination.toDouble()
-                
-                   val readableString
-        get() = (currency.name + " " + if (readableValue - floor(readableValue) == 0.0) "${"$"}readableValue.0" else readableValue).replace(
-            ".0.0",
-            ".0"
-        )
-            }
-        """.trimIndent()
-        )
-    }
-
     fun generateMoneyBuilder(currencyNames: List<Map<String, String>>) {
         val output = File(outputDir, "MoneyBuilders.kt")
         if (!output.exists()) output.createNewFile()
         output.writeText(
             """
+            /*
+             * This is a generated document
+             * author of the generator: https://github.com/andylamax
+            */
             @file:JvmName("MoneyBuilders")
             @file:Suppress("unused")
             
@@ -161,6 +123,10 @@ open class CodeGenerator : DefaultTask() {
         if (!output.exists()) output.createNewFile()
         output.writeText(
             """
+            /*
+             * This is a generated document
+             * author of the generator: https://github.com/andylamax
+            */
             @file:Suppress("unused")
             
             package $packageName${"\n\n"}
@@ -183,7 +149,6 @@ open class CodeGenerator : DefaultTask() {
     @TaskAction
     fun execute() {
         val currencies = generateCurrencies()
-        generateMoney()
         generateKashUtils(currencies)
         generateMoneyBuilder(currencies)
     }

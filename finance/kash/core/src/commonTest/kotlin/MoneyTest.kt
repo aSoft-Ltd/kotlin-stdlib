@@ -1,3 +1,4 @@
+import expect.expect
 import kotlinx.serialization.json.Json
 import kash.Money
 import kash.TZS
@@ -19,15 +20,14 @@ class MoneyTest {
     fun should_deserialize_correctly() {
         val json = """{"amount":50000,"currency":"TZS"}"""
         val money = Json.decodeFromString(Money.serializer(), json)
-        assertEquals(money, 500.TZS)
-        println(500.TZS.readableString)
-        assertEquals("TZS 500.0", money.readableString)
+        expect(money).toBe(500.TZS)
+        expect("TZS 500").toBe(money.toLongString())
     }
 
     @Test
     fun should_print_usd_correctly() {
-        assertEquals("USD 3.0", 3.00.USD.readableString)
-        assertEquals("USD 3.15", 3.15.USD.readableString)
-        assertEquals("UGX 4.49", 4.49.UGX.readableString)
+        assertEquals("US$ 3", 3.00.USD.toLongString())
+        assertEquals("US$ 3.15", 3.15.USD.toLongString())
+        assertEquals("USh 4.49", 4.49.UGX.toLongString())
     }
 }

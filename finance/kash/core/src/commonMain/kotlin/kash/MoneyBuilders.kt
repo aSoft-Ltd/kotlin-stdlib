@@ -1,3 +1,7 @@
+/*
+ * This is a generated document
+ * author of the generator: https://github.com/andylamax
+*/
 @file:JvmName("MoneyBuilders")
 @file:Suppress("unused")
 

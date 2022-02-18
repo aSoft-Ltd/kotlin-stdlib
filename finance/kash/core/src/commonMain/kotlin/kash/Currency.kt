@@ -1,484 +1,502 @@
-@file:Suppress("unused")
+/*
+ * This is a generated document
+ * author of the generator: https://github.com/andylamax
+ */
+@file:JsExport
+@file:Suppress("unused","WRONG_EXPORTED_DECLARATION")
 
 package kash
 
 import kotlin.jvm.JvmSynthetic
+import kotlin.js.JsExport
+import kotlin.js.JsName
+import kotlinx.serialization.Serializable
 
-enum class Currency(val symbol: String, val details: String,val lowestDenomination: UShort) {
-
+@Serializable(with = CurrencySerializer::class)
+sealed class Currency(val name: String, val symbol: String, val details: String,val lowestDenomination: Short) {
+    override fun toString() = name
+    companion object {
+        val values = arrayOf(AED,AFN,ALL,AMD,ANG,AOA,ARS,AUD,AWG,AZN,BAM,BBD,BDT,BGN,BHD,BIF,BMD,BND,BOB,BRL,BSD,BTN,BWP,BYR,BZD,CAD,CDF,CHF,CLP,CNY,COP,CRC,CUC,CVE,CZK,DJF,DKK,DOP,DZD,EEK,EGP,ERN,ETB,EUR,FJD,FKP,GBP,GEL,GHS,GIP,GMD,GNF,GQE,GTQ,GYD,HKD,HNL,HRK,HTG,HUF,IDR,ILS,INR,IQD,IRR,ISK,JMD,JOD,JPY,KES,KGS,KHR,KMF,KPW,KRW,KWD,KYD,KZT,LAK,LBP,LKR,LRD,LSL,LTL,LVL,LYD,MAD,MDL,MGA,MKD,MMK,MNT,MOP,MRO,MUR,MVR,MWK,MXN,MYR,MZM,NAD,NGN,NIO,NOK,NPR,NZD,OMR,PAB,PEN,PGK,PHP,PKR,PLN,PYG,QAR,RON,RSD,RUB,SAR,SBD,SCR,SDG,SEK,SGD,SHP,SLL,SOS,SRD,SYP,SZL,THB,TJS,TMT,TND,TRY,TTD,TWD,TZS,UAH,UGX,USD,UYU,UZS,VEB,VND,VUV,WST,XAF,XCD,XDR,XOF,XPF,YER,ZAR,ZMK,ZWR)
+        fun valueOf(currency: String) = values.first{ it.name == currency }
+    }            
 	/**UAE dirham*/
-	AED("د.إ;","UAE dirham",100u),
+	object AED : Currency("AED","د.إ;","UAE dirham",100)
 
 	/**Afghan afghani*/
-	AFN("Afs","Afghan afghani",100u),
+	object AFN : Currency("AFN","Afs","Afghan afghani",100)
 
 	/**Albanian lek*/
-	ALL("L","Albanian lek",100u),
+	object ALL : Currency("ALL","L","Albanian lek",100)
 
 	/**Armenian dram*/
-	AMD("AMD","Armenian dram",100u),
+	object AMD : Currency("AMD","AMD","Armenian dram",100)
 
 	/**Netherlands Antillean gulden*/
-	ANG("NAƒ","Netherlands Antillean gulden",100u),
+	object ANG : Currency("ANG","NAƒ","Netherlands Antillean gulden",100)
 
 	/**Angolan kwanza*/
-	AOA("Kz","Angolan kwanza",100u),
+	object AOA : Currency("AOA","Kz","Angolan kwanza",100)
 
 	/**Argentine peso*/
-	ARS("$","Argentine peso",100u),
+	object ARS : Currency("ARS","$","Argentine peso",100)
 
 	/**Australian dollar*/
-	AUD("$","Australian dollar",100u),
+	object AUD : Currency("AUD","$","Australian dollar",100)
 
 	/**Aruban florin*/
-	AWG("ƒ","Aruban florin",100u),
+	object AWG : Currency("AWG","ƒ","Aruban florin",100)
 
 	/**Azerbaijani manat*/
-	AZN("AZN","Azerbaijani manat",100u),
+	object AZN : Currency("AZN","AZN","Azerbaijani manat",100)
 
 	/**Bosnia and Herzegovina konvertibilna marka*/
-	BAM("KM","Bosnia and Herzegovina konvertibilna marka",100u),
+	object BAM : Currency("BAM","KM","Bosnia and Herzegovina konvertibilna marka",100)
 
 	/**Barbadian dollar*/
-	BBD("Bds$","Barbadian dollar",100u),
+	object BBD : Currency("BBD","Bds$","Barbadian dollar",100)
 
 	/**Bangladeshi taka*/
-	BDT("৳","Bangladeshi taka",100u),
+	object BDT : Currency("BDT","৳","Bangladeshi taka",100)
 
 	/**Bulgarian lev*/
-	BGN("BGN","Bulgarian lev",100u),
+	object BGN : Currency("BGN","BGN","Bulgarian lev",100)
 
 	/**Bahraini dinar*/
-	BHD(".د.ب","Bahraini dinar",100u),
+	object BHD : Currency("BHD",".د.ب","Bahraini dinar",100)
 
 	/**Burundi franc*/
-	BIF("FBu","Burundi franc",100u),
+	object BIF : Currency("BIF","FBu","Burundi franc",100)
 
 	/**Bermudian dollar*/
-	BMD("BD$","Bermudian dollar",100u),
+	object BMD : Currency("BMD","BD$","Bermudian dollar",100)
 
 	/**Brunei dollar*/
-	BND("B$","Brunei dollar",100u),
+	object BND : Currency("BND","B$","Brunei dollar",100)
 
 	/**Bolivian boliviano*/
-	BOB("Bs.","Bolivian boliviano",100u),
+	object BOB : Currency("BOB","Bs.","Bolivian boliviano",100)
 
 	/**Brazilian real*/
-	BRL("R$","Brazilian real",100u),
+	object BRL : Currency("BRL","R$","Brazilian real",100)
 
 	/**Bahamian dollar*/
-	BSD("B$","Bahamian dollar",100u),
+	object BSD : Currency("BSD","B$","Bahamian dollar",100)
 
 	/**Bhutanese ngultrum*/
-	BTN("Nu.","Bhutanese ngultrum",100u),
+	object BTN : Currency("BTN","Nu.","Bhutanese ngultrum",100)
 
 	/**Botswana pula*/
-	BWP("P","Botswana pula",100u),
+	object BWP : Currency("BWP","P","Botswana pula",100)
 
 	/**Belarusian ruble*/
-	BYR("Br","Belarusian ruble",100u),
+	object BYR : Currency("BYR","Br","Belarusian ruble",100)
 
 	/**Belize dollar*/
-	BZD("BZ$","Belize dollar",100u),
+	object BZD : Currency("BZD","BZ$","Belize dollar",100)
 
 	/**Canadian dollar*/
-	CAD("$","Canadian dollar",100u),
+	object CAD : Currency("CAD","$","Canadian dollar",100)
 
 	/**Congolese franc*/
-	CDF("F","Congolese franc",100u),
+	object CDF : Currency("CDF","F","Congolese franc",100)
 
 	/**Swiss franc*/
-	CHF("Fr.","Swiss franc",100u),
+	object CHF : Currency("CHF","Fr.","Swiss franc",100)
 
 	/**Chilean peso*/
-	CLP("$","Chilean peso",100u),
+	object CLP : Currency("CLP","$","Chilean peso",100)
 
 	/**Chinese/Yuan renminbi*/
-	CNY("¥","Chinese/Yuan renminbi",100u),
+	object CNY : Currency("CNY","¥","Chinese/Yuan renminbi",100)
 
 	/**Colombian peso*/
-	COP("Col$","Colombian peso",100u),
+	object COP : Currency("COP","Col$","Colombian peso",100)
 
 	/**Costa Rican colon*/
-	CRC("₡","Costa Rican colon",100u),
+	object CRC : Currency("CRC","₡","Costa Rican colon",100)
 
 	/**Cuban peso*/
-	CUC("$","Cuban peso",100u),
+	object CUC : Currency("CUC","$","Cuban peso",100)
 
 	/**Cape Verdean escudo*/
-	CVE("Esc","Cape Verdean escudo",100u),
+	object CVE : Currency("CVE","Esc","Cape Verdean escudo",100)
 
 	/**Czech koruna*/
-	CZK("Kč","Czech koruna",100u),
+	object CZK : Currency("CZK","Kč","Czech koruna",100)
 
 	/**Djiboutian franc*/
-	DJF("Fdj","Djiboutian franc",100u),
+	object DJF : Currency("DJF","Fdj","Djiboutian franc",100)
 
 	/**Danish krone*/
-	DKK("Kr","Danish krone",100u),
+	object DKK : Currency("DKK","Kr","Danish krone",100)
 
 	/**Dominican peso*/
-	DOP("RD$","Dominican peso",100u),
+	object DOP : Currency("DOP","RD$","Dominican peso",100)
 
 	/**Algerian dinar*/
-	DZD("د.ج","Algerian dinar",100u),
+	object DZD : Currency("DZD","د.ج","Algerian dinar",100)
 
 	/**Estonian kroon*/
-	EEK("KR","Estonian kroon",100u),
+	object EEK : Currency("EEK","KR","Estonian kroon",100)
 
 	/**Egyptian pound*/
-	EGP("£","Egyptian pound",100u),
+	object EGP : Currency("EGP","£","Egyptian pound",100)
 
 	/**Eritrean nakfa*/
-	ERN("Nfa","Eritrean nakfa",100u),
+	object ERN : Currency("ERN","Nfa","Eritrean nakfa",100)
 
 	/**Ethiopian birr*/
-	ETB("Br","Ethiopian birr",100u),
+	object ETB : Currency("ETB","Br","Ethiopian birr",100)
 
 	/**European Euro*/
-	EUR("€","European Euro",100u),
+	object EUR : Currency("EUR","€","European Euro",100)
 
 	/**Fijian dollar*/
-	FJD("FJ$","Fijian dollar",100u),
+	object FJD : Currency("FJD","FJ$","Fijian dollar",100)
 
 	/**Falkland Islands pound*/
-	FKP("£","Falkland Islands pound",100u),
+	object FKP : Currency("FKP","£","Falkland Islands pound",100)
 
 	/**British pound*/
-	GBP("£","British pound",100u),
+	object GBP : Currency("GBP","£","British pound",100)
 
 	/**Georgian lari*/
-	GEL("GEL","Georgian lari",100u),
+	object GEL : Currency("GEL","GEL","Georgian lari",100)
 
 	/**Ghanaian cedi*/
-	GHS("GH₵","Ghanaian cedi",100u),
+	object GHS : Currency("GHS","GH₵","Ghanaian cedi",100)
 
 	/**Gibraltar pound*/
-	GIP("£","Gibraltar pound",100u),
+	object GIP : Currency("GIP","£","Gibraltar pound",100)
 
 	/**Gambian dalasi*/
-	GMD("D","Gambian dalasi",100u),
+	object GMD : Currency("GMD","D","Gambian dalasi",100)
 
 	/**Guinean franc*/
-	GNF("FG","Guinean franc",100u),
+	object GNF : Currency("GNF","FG","Guinean franc",100)
 
 	/**Central African CFA franc*/
-	GQE("CFA","Central African CFA franc",100u),
+	object GQE : Currency("GQE","CFA","Central African CFA franc",100)
 
 	/**Guatemalan quetzal*/
-	GTQ("Q","Guatemalan quetzal",100u),
+	object GTQ : Currency("GTQ","Q","Guatemalan quetzal",100)
 
 	/**Guyanese dollar*/
-	GYD("GY$","Guyanese dollar",100u),
+	object GYD : Currency("GYD","GY$","Guyanese dollar",100)
 
 	/**Hong Kong dollar*/
-	HKD("HK$","Hong Kong dollar",100u),
+	object HKD : Currency("HKD","HK$","Hong Kong dollar",100)
 
 	/**Honduran lempira*/
-	HNL("L","Honduran lempira",100u),
+	object HNL : Currency("HNL","L","Honduran lempira",100)
 
 	/**Croatian kuna*/
-	HRK("kn","Croatian kuna",100u),
+	object HRK : Currency("HRK","kn","Croatian kuna",100)
 
 	/**Haitian gourde*/
-	HTG("G","Haitian gourde",100u),
+	object HTG : Currency("HTG","G","Haitian gourde",100)
 
 	/**Hungarian forint*/
-	HUF("Ft","Hungarian forint",100u),
+	object HUF : Currency("HUF","Ft","Hungarian forint",100)
 
 	/**Indonesian rupiah*/
-	IDR("Rp","Indonesian rupiah",100u),
+	object IDR : Currency("IDR","Rp","Indonesian rupiah",100)
 
 	/**Israeli new sheqel*/
-	ILS("₪","Israeli new sheqel",100u),
+	object ILS : Currency("ILS","₪","Israeli new sheqel",100)
 
 	/**Indian rupee*/
-	INR("₹","Indian rupee",100u),
+	object INR : Currency("INR","₹","Indian rupee",100)
 
 	/**Iraqi dinar*/
-	IQD("د.ع","Iraqi dinar",100u),
+	object IQD : Currency("IQD","د.ع","Iraqi dinar",100)
 
 	/**Iranian rial*/
-	IRR("IRR","Iranian rial",100u),
+	object IRR : Currency("IRR","IRR","Iranian rial",100)
 
 	/**Icelandic króna*/
-	ISK("kr","Icelandic króna",100u),
+	object ISK : Currency("ISK","kr","Icelandic króna",100)
 
 	/**Jamaican dollar*/
-	JMD("J$","Jamaican dollar",100u),
+	object JMD : Currency("JMD","J$","Jamaican dollar",100)
 
 	/**Jordanian dinar*/
-	JOD("JOD","Jordanian dinar",100u),
+	object JOD : Currency("JOD","JOD","Jordanian dinar",100)
 
 	/**Japanese yen*/
-	JPY("¥","Japanese yen",100u),
+	object JPY : Currency("JPY","¥","Japanese yen",100)
 
 	/**Kenyan shilling*/
-	KES("KSh","Kenyan shilling",100u),
+	object KES : Currency("KES","KSh","Kenyan shilling",100)
 
 	/**Kyrgyzstani som*/
-	KGS("сом","Kyrgyzstani som",100u),
+	object KGS : Currency("KGS","сом","Kyrgyzstani som",100)
 
 	/**Cambodian riel*/
-	KHR("៛","Cambodian riel",100u),
+	object KHR : Currency("KHR","៛","Cambodian riel",100)
 
 	/**Comorian franc*/
-	KMF("KMF","Comorian franc",100u),
+	object KMF : Currency("KMF","KMF","Comorian franc",100)
 
 	/**North Korean won*/
-	KPW("W","North Korean won",100u),
+	object KPW : Currency("KPW","W","North Korean won",100)
 
 	/**South Korean won*/
-	KRW("W","South Korean won",100u),
+	object KRW : Currency("KRW","W","South Korean won",100)
 
 	/**Kuwaiti dinar*/
-	KWD("KWD","Kuwaiti dinar",100u),
+	object KWD : Currency("KWD","KWD","Kuwaiti dinar",100)
 
 	/**Cayman Islands dollar*/
-	KYD("KY$","Cayman Islands dollar",100u),
+	object KYD : Currency("KYD","KY$","Cayman Islands dollar",100)
 
 	/**Kazakhstani tenge*/
-	KZT("T","Kazakhstani tenge",100u),
+	object KZT : Currency("KZT","T","Kazakhstani tenge",100)
 
 	/**Lao kip*/
-	LAK("KN","Lao kip",100u),
+	object LAK : Currency("LAK","KN","Lao kip",100)
 
 	/**Lebanese lira*/
-	LBP("£","Lebanese lira",100u),
+	object LBP : Currency("LBP","£","Lebanese lira",100)
 
 	/**Sri Lankan rupee*/
-	LKR("Rs","Sri Lankan rupee",100u),
+	object LKR : Currency("LKR","Rs","Sri Lankan rupee",100)
 
 	/**Liberian dollar*/
-	LRD("L$","Liberian dollar",100u),
+	object LRD : Currency("LRD","L$","Liberian dollar",100)
 
 	/**Lesotho loti*/
-	LSL("M","Lesotho loti",100u),
+	object LSL : Currency("LSL","M","Lesotho loti",100)
 
 	/**Lithuanian litas*/
-	LTL("Lt","Lithuanian litas",100u),
+	object LTL : Currency("LTL","Lt","Lithuanian litas",100)
 
 	/**Latvian lats*/
-	LVL("Ls","Latvian lats",100u),
+	object LVL : Currency("LVL","Ls","Latvian lats",100)
 
 	/**Libyan dinar*/
-	LYD("LD","Libyan dinar",100u),
+	object LYD : Currency("LYD","LD","Libyan dinar",100)
 
 	/**Moroccan dirham*/
-	MAD("MAD","Moroccan dirham",100u),
+	object MAD : Currency("MAD","MAD","Moroccan dirham",100)
 
 	/**Moldovan leu*/
-	MDL("MDL","Moldovan leu",100u),
+	object MDL : Currency("MDL","MDL","Moldovan leu",100)
 
 	/**Malagasy ariary*/
-	MGA("FMG","Malagasy ariary",100u),
+	object MGA : Currency("MGA","FMG","Malagasy ariary",100)
 
 	/**Macedonian denar*/
-	MKD("MKD","Macedonian denar",100u),
+	object MKD : Currency("MKD","MKD","Macedonian denar",100)
 
 	/**Myanma kyat*/
-	MMK("K","Myanma kyat",100u),
+	object MMK : Currency("MMK","K","Myanma kyat",100)
 
 	/**Mongolian tugrik*/
-	MNT("₮","Mongolian tugrik",100u),
+	object MNT : Currency("MNT","₮","Mongolian tugrik",100)
 
 	/**Macanese pataca*/
-	MOP("P","Macanese pataca",100u),
+	object MOP : Currency("MOP","P","Macanese pataca",100)
 
 	/**Mauritanian ouguiya*/
-	MRO("UM","Mauritanian ouguiya",100u),
+	object MRO : Currency("MRO","UM","Mauritanian ouguiya",100)
 
 	/**Mauritian rupee*/
-	MUR("Rs","Mauritian rupee",100u),
+	object MUR : Currency("MUR","Rs","Mauritian rupee",100)
 
 	/**Maldivian rufiyaa*/
-	MVR("Rf","Maldivian rufiyaa",100u),
+	object MVR : Currency("MVR","Rf","Maldivian rufiyaa",100)
 
 	/**Malawian kwacha*/
-	MWK("MK","Malawian kwacha",100u),
+	object MWK : Currency("MWK","MK","Malawian kwacha",100)
 
 	/**Mexican peso*/
-	MXN("$","Mexican peso",100u),
+	object MXN : Currency("MXN","$","Mexican peso",100)
 
 	/**Malaysian ringgit*/
-	MYR("RM","Malaysian ringgit",100u),
+	object MYR : Currency("MYR","RM","Malaysian ringgit",100)
 
 	/**Mozambican metical*/
-	MZM("MTn","Mozambican metical",100u),
+	object MZM : Currency("MZM","MTn","Mozambican metical",100)
 
 	/**Namibian dollar*/
-	NAD("N$","Namibian dollar",100u),
+	object NAD : Currency("NAD","N$","Namibian dollar",100)
 
 	/**Nigerian naira*/
-	NGN("₦","Nigerian naira",100u),
+	object NGN : Currency("NGN","₦","Nigerian naira",100)
 
 	/**Nicaraguan córdoba*/
-	NIO("C$","Nicaraguan córdoba",100u),
+	object NIO : Currency("NIO","C$","Nicaraguan córdoba",100)
 
 	/**Norwegian krone*/
-	NOK("kr","Norwegian krone",100u),
+	object NOK : Currency("NOK","kr","Norwegian krone",100)
 
 	/**Nepalese rupee*/
-	NPR("NRs","Nepalese rupee",100u),
+	object NPR : Currency("NPR","NRs","Nepalese rupee",100)
 
 	/**New Zealand dollar*/
-	NZD("NZ$","New Zealand dollar",100u),
+	object NZD : Currency("NZD","NZ$","New Zealand dollar",100)
 
 	/**Omani rial*/
-	OMR("OMR","Omani rial",100u),
+	object OMR : Currency("OMR","OMR","Omani rial",100)
 
 	/**Panamanian balboa*/
-	PAB("B./","Panamanian balboa",100u),
+	object PAB : Currency("PAB","B./","Panamanian balboa",100)
 
 	/**Peruvian nuevo sol*/
-	PEN("S/.","Peruvian nuevo sol",100u),
+	object PEN : Currency("PEN","S/.","Peruvian nuevo sol",100)
 
 	/**Papua New Guinean kina*/
-	PGK("K","Papua New Guinean kina",100u),
+	object PGK : Currency("PGK","K","Papua New Guinean kina",100)
 
 	/**Philippine peso*/
-	PHP("₱","Philippine peso",100u),
+	object PHP : Currency("PHP","₱","Philippine peso",100)
 
 	/**Pakistani rupee*/
-	PKR("Rs.","Pakistani rupee",100u),
+	object PKR : Currency("PKR","Rs.","Pakistani rupee",100)
 
 	/**Polish zloty*/
-	PLN("zł","Polish zloty",100u),
+	object PLN : Currency("PLN","zł","Polish zloty",100)
 
 	/**Paraguayan guarani*/
-	PYG("₲","Paraguayan guarani",100u),
+	object PYG : Currency("PYG","₲","Paraguayan guarani",100)
 
 	/**Qatari riyal*/
-	QAR("QR","Qatari riyal",100u),
+	object QAR : Currency("QAR","QR","Qatari riyal",100)
 
 	/**Romanian leu*/
-	RON("L","Romanian leu",100u),
+	object RON : Currency("RON","L","Romanian leu",100)
 
 	/**Serbian dinar*/
-	RSD("din.","Serbian dinar",100u),
+	object RSD : Currency("RSD","din.","Serbian dinar",100)
 
 	/**Russian ruble*/
-	RUB("R","Russian ruble",100u),
+	object RUB : Currency("RUB","R","Russian ruble",100)
 
 	/**Saudi riyal*/
-	SAR("SR","Saudi riyal",100u),
+	object SAR : Currency("SAR","SR","Saudi riyal",100)
 
 	/**Solomon Islands dollar*/
-	SBD("SI$","Solomon Islands dollar",100u),
+	object SBD : Currency("SBD","SI$","Solomon Islands dollar",100)
 
 	/**Seychellois rupee*/
-	SCR("SR","Seychellois rupee",100u),
+	object SCR : Currency("SCR","SR","Seychellois rupee",100)
 
 	/**Sudanese pound*/
-	SDG("SDG","Sudanese pound",100u),
+	object SDG : Currency("SDG","SDG","Sudanese pound",100)
 
 	/**Swedish krona*/
-	SEK("kr","Swedish krona",100u),
+	object SEK : Currency("SEK","kr","Swedish krona",100)
 
 	/**Singapore dollar*/
-	SGD("S$","Singapore dollar",100u),
+	object SGD : Currency("SGD","S$","Singapore dollar",100)
 
 	/**Saint Helena pound*/
-	SHP("£","Saint Helena pound",100u),
+	object SHP : Currency("SHP","£","Saint Helena pound",100)
 
 	/**Sierra Leonean leone*/
-	SLL("Le","Sierra Leonean leone",100u),
+	object SLL : Currency("SLL","Le","Sierra Leonean leone",100)
 
 	/**Somali shilling*/
-	SOS("Sh.","Somali shilling",100u),
+	object SOS : Currency("SOS","Sh.","Somali shilling",100)
 
 	/**Surinamese dollar*/
-	SRD("$","Surinamese dollar",100u),
+	object SRD : Currency("SRD","$","Surinamese dollar",100)
 
 	/**Syrian pound*/
-	SYP("LS","Syrian pound",100u),
+	object SYP : Currency("SYP","LS","Syrian pound",100)
 
 	/**Swazi lilangeni*/
-	SZL("E","Swazi lilangeni",100u),
+	object SZL : Currency("SZL","E","Swazi lilangeni",100)
 
 	/**Thai baht*/
-	THB("฿","Thai baht",100u),
+	object THB : Currency("THB","฿","Thai baht",100)
 
 	/**Tajikistani somoni*/
-	TJS("TJS","Tajikistani somoni",100u),
+	object TJS : Currency("TJS","TJS","Tajikistani somoni",100)
 
 	/**Turkmen manat*/
-	TMT("m","Turkmen manat",100u),
+	object TMT : Currency("TMT","m","Turkmen manat",100)
 
 	/**Tunisian dinar*/
-	TND("DT","Tunisian dinar",100u),
+	object TND : Currency("TND","DT","Tunisian dinar",100)
 
 	/**Turkish new lira*/
-	TRY("TRY","Turkish new lira",100u),
+	object TRY : Currency("TRY","TRY","Turkish new lira",100)
 
 	/**Trinidad and Tobago dollar*/
-	TTD("TT$","Trinidad and Tobago dollar",100u),
+	object TTD : Currency("TTD","TT$","Trinidad and Tobago dollar",100)
 
 	/**New Taiwan dollar*/
-	TWD("NT$","New Taiwan dollar",100u),
+	object TWD : Currency("TWD","NT$","New Taiwan dollar",100)
 
 	/**Tanzanian shilling*/
-	TZS("TZS","Tanzanian shilling",100u),
+	object TZS : Currency("TZS","TZS","Tanzanian shilling",100)
 
 	/**Ukrainian hryvnia*/
-	UAH("UAH","Ukrainian hryvnia",100u),
+	object UAH : Currency("UAH","UAH","Ukrainian hryvnia",100)
 
 	/**Ugandan shilling*/
-	UGX("USh","Ugandan shilling",100u),
+	object UGX : Currency("UGX","USh","Ugandan shilling",100)
 
 	/**United States dollar*/
-	USD("US$","United States dollar",100u),
+	object USD : Currency("USD","US$","United States dollar",100)
 
 	/**Uruguayan peso*/
-	UYU("${"$"}U","Uruguayan peso",100u),
+	object UYU : Currency("UYU","${"$"}U","Uruguayan peso",100)
 
 	/**Uzbekistani som*/
-	UZS("UZS","Uzbekistani som",100u),
+	object UZS : Currency("UZS","UZS","Uzbekistani som",100)
 
 	/**Venezuelan bolivar*/
-	VEB("Bs","Venezuelan bolivar",100u),
+	object VEB : Currency("VEB","Bs","Venezuelan bolivar",100)
 
 	/**Vietnamese dong*/
-	VND("₫","Vietnamese dong",100u),
+	object VND : Currency("VND","₫","Vietnamese dong",100)
 
 	/**Vanuatu vatu*/
-	VUV("VT","Vanuatu vatu",100u),
+	object VUV : Currency("VUV","VT","Vanuatu vatu",100)
 
 	/**Samoan tala*/
-	WST("WS$","Samoan tala",100u),
+	object WST : Currency("WST","WS$","Samoan tala",100)
 
 	/**Central African CFA franc*/
-	XAF("CFA","Central African CFA franc",100u),
+	object XAF : Currency("XAF","CFA","Central African CFA franc",100)
 
 	/**East Caribbean dollar*/
-	XCD("EC$","East Caribbean dollar",100u),
+	object XCD : Currency("XCD","EC$","East Caribbean dollar",100)
 
 	/**Special Drawing Rights*/
-	XDR("SDR","Special Drawing Rights",100u),
+	object XDR : Currency("XDR","SDR","Special Drawing Rights",100)
 
 	/**West African CFA franc*/
-	XOF("CFA","West African CFA franc",100u),
+	object XOF : Currency("XOF","CFA","West African CFA franc",100)
 
 	/**CFP franc*/
-	XPF("F","CFP franc",100u),
+	object XPF : Currency("XPF","F","CFP franc",100)
 
 	/**Yemeni rial*/
-	YER("YER","Yemeni rial",100u),
+	object YER : Currency("YER","YER","Yemeni rial",100)
 
 	/**South African rand*/
-	ZAR("R","South African rand",100u),
+	object ZAR : Currency("ZAR","R","South African rand",100)
 
 	/**Zambian kwacha*/
-	ZMK("ZK","Zambian kwacha",100u),
+	object ZMK : Currency("ZMK","ZK","Zambian kwacha",100)
 
 	/**Zimbabwean dollar*/
-	ZWR("Z$","Zimbabwean dollar",100u);
+	object ZWR : Currency("ZWR","Z$","Zimbabwean dollar",100)
 
-    fun of(amount: UInt) = Money((amount * lowestDenomination).toULong(), this)
-    fun of(amount: ULong) = Money((amount * lowestDenomination).toULong(), this)
-    fun of(amount: Double) = Money((amount * lowestDenomination.toShort()).toULong(), this)
+    @JsName("ofUIntValue")
+    fun of(amount: UInt) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
+    @JsName("ofULongValue")
+    fun of(amount: ULong) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
+    @JsName("ofDoubleValue")
+    fun of(amount: Double) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
     @JvmSynthetic
-    fun of(amount: Int) = Money((amount * lowestDenomination.toShort()).toULong(), this)
+    @JsName("ofIntValue")
+    fun of(amount: Int) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
     @JvmSynthetic
-    fun of(amount: Long) = Money((amount * lowestDenomination.toShort()).toULong(), this)
+    @JsName("ofLongValue")
+    fun of(amount: Long) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
 }
