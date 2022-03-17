@@ -1,3 +1,3 @@
-- Removed ViewModel linux targets coz it lacks the main dispatcher
-- Updated to kotlin 1.6.10
-- Updated to use kotlin wrappers bom
+- Bumped kotlin from 1.6.10 to 1.6.20-RC
+- Deprecated Money toShortString & toLongString in favour of toFormattedString
+- Removed compose artifacts (Waiting for them to catch up to 1.6.20-RC)

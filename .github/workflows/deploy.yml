@@ -53,6 +53,9 @@ jobs:
       - name: Warm up the jvm
         run: ./gradlew tasks
 
+      - name: Generate Currencies
+        run: ./gradlew :kash-core:generate
+
       - name: Building project
         run: ./gradlew build
 
