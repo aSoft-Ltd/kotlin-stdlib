@@ -37,14 +37,14 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 
 rootProject.name = "stdlib"
 
-includeSubs("live", "mvivm/live", "core", "react", "compose", "coroutines")
-includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "compose", "coroutines")
+includeSubs("live", "mvivm/live", "core", "react", "coroutines")// "compose")
+includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "coroutines")// "compose")
 includeSubs("viewmodel-test", "mvivm/viewmodel/test", "core", "expect")
 
 includeSubs("identifier", "identifier", "core", "generators")
 
-includeSubs("color", "aesthetics/color", "core", "css", "compose")
-includeSubs("theme", "aesthetics/theme", "core", "css", "compose", "react")
+includeSubs("color", "aesthetics/color", "core", "css")// "compose")
+includeSubs("theme", "aesthetics/theme", "core", "css", "react")//"compose",)
 includeSubs("reakt", "reakt", "core", "web", "icons")
 
 includeSubs("kash", "finance/kash", "core")

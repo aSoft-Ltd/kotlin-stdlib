@@ -5,6 +5,10 @@ plugins {
     signing
 }
 
+val generate by tasks.creating(CodeGenerator::class) {
+    outputDir = file("build/generated/currencies/kotlin")
+}
+
 kotlin {
     jvm {
         library();
@@ -16,6 +20,7 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {
+            kotlin.srcDir(generate.outputDir)
             dependencies {
                 api(kotlinx.serialization.core)
             }
@@ -28,8 +33,6 @@ kotlin {
         }
     }
 }
-
-val generate by tasks.creating(CodeGenerator::class)
 
 val assemble by tasks.getting {
     dependsOn(generate)

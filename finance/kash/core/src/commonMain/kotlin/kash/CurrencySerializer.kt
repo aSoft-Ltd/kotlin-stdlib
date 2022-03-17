@@ -13,15 +13,6 @@ import kotlinx.serialization.encoding.Encoder
 object CurrencySerializer : KSerializer<Currency> {
     @OptIn(InternalSerializationApi::class)
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Currency", PrimitiveKind.STRING)
-
-    override fun serialize(encoder: Encoder, value: Currency) {
-        encoder.encodeString(value.name)
-    }
-
-    override fun deserialize(decoder: Decoder): Currency {
-        println("Deserializing")
-        val name = decoder.decodeString()
-        println(name)
-        return Currency.valueOf(name)
-    }
+    override fun serialize(encoder: Encoder, value: Currency) = encoder.encodeString(value.name)
+    override fun deserialize(decoder: Decoder): Currency = Currency.valueOf(decoder.decodeString())
 }

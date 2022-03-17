@@ -1,13 +1,17 @@
+@file:JsExport
+
 package kash
 
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
-@JsExport
 object PREFIX {
     @JvmField
-    val NAME = "NAME"
+    val CURRENCY_NAME = "CURRENCY_NAME"
 
     @JvmField
-    val SYMBOL = "SYMBOL"
+    val CURRENCY_GLOBAL_SYMBOL = "GLOBAL_SYMBOL"
+
+    @JvmField
+    val CURRENCY_LOCAL_SYMBOL = "LOCAL_SYMBOL"
 }
