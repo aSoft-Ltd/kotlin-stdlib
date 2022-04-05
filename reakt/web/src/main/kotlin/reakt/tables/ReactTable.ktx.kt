@@ -1,6 +1,6 @@
 package reakt
 
-import kotlinext.js.jso
+import kotlinx.js.jso
 import kotlinext.js.require
 import kotlinx.css.*
 import react.*
@@ -39,7 +39,7 @@ inline fun <D> RenderColumn(
     render(builder)
 }
 
-inline fun Column<*>.filterComponent(crossinline builder: RBuilder.(FilterProp) -> ReactElement) {
+inline fun Column<*>.filterComponent(crossinline builder: RBuilder.(FilterProp) -> ReactElement<*>) {
     Filter = { buildElement { builder(it) } }
 }
 

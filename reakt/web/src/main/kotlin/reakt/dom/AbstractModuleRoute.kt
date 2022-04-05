@@ -7,13 +7,13 @@ import react.buildElement
 import react.router.RouterProps
 
 abstract class AbstractModuleRoute(
-    val permits: List<String>, val path: String, val scope: String, val render: (props: RouterProps) -> ReactElement?
+    val permits: List<String>, val path: String, val scope: String, val render: (props: RouterProps) -> ReactElement<*>?
 )
 
 fun <T : Props> ModuleRoute(
     path: String, permits: List<String>, scope: String, builder: RBuilder.(props: RouterProps) -> Unit
 ): AbstractModuleRoute {
-    val render: (RouterProps) -> ReactElement? = {
+    val render: (RouterProps) -> ReactElement<*>? = {
         buildElement { builder(it) }
     }
     return object : AbstractModuleRoute(

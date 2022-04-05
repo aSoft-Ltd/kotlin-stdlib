@@ -99,10 +99,10 @@ external interface Column<D> {
     var columns: Array<Column<*>>
     var filterable: Boolean
     var foldable: Boolean
-    var Filter: (FilterProp) -> ReactElement
+    var Filter: (FilterProp) -> ReactElement<*>
     var filterMethod: (filter: Filter, row: Row<D>, column: Column<D>) -> Boolean
     var pivot: Boolean
-    var Cell: (Row<D>) -> ReactElement?
+    var Cell: (Row<D>) -> ReactElement<*>?
     var style: dynamic
 }
 

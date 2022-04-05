@@ -11,8 +11,8 @@ external interface FoldIconProps {
 }
 
 external interface FoldableTableProps<D> : TableProps<D> {
-    var FoldIconComponent: (FoldIconProps) -> ReactElement
-    var FoldButtonComponent: (FoldIconProps) -> ReactElement
+    var FoldIconComponent: (FoldIconProps) -> ReactElement<*>
+    var FoldButtonComponent: (FoldIconProps) -> ReactElement<*>
 }
 
 @JsModule("react-table/lib/hoc/foldableTable")
