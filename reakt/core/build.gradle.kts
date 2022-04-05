@@ -11,6 +11,7 @@ kotlin {
         val main by getting {
             dependencies {
                 api(kotlinx.coroutines.core)
+                api(project.dependencies.platform(kotlinw.bom))
                 api(kotlinw.react.old)
                 api(kotlinw.styled)
             }

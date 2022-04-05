@@ -1,6 +1,6 @@
 [versions]
-stdlib = "0.2.30"
-foundation = "1.4.62"
+stdlib = "0.2.40"
+foundation = "1.5.0"
 
 [libraries]
 expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }

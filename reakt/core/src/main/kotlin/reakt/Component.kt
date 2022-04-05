@@ -35,5 +35,5 @@ abstract class Component<P : Props, S : State> : ReactComponent<P, S>, Coroutine
 
     abstract fun RBuilder.render(): dynamic
 
-    override fun render() = createElement { render() }
+    override fun render() = createElement<P> { render() }
 }

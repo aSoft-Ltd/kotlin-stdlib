@@ -10,6 +10,7 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
+                api(project.dependencies.platform(kotlinw.bom))
                 api(kotlinw.react.old)
                 api(npm("react-icons", "3.10.0"))
             }

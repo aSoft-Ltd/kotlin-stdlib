@@ -10,6 +10,7 @@ kotlin {
         val main by getting {
             dependencies {
                 api(project(":live-core"))
+                api(project.dependencies.platform(kotlinw.bom))
                 api(kotlinw.react.core)
             }
         }
