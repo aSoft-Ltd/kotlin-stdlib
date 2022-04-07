@@ -2,10 +2,13 @@
 
 package kash
 
+import formatter.Formatter
 import kash.MoneyFormatterOptions.Companion.DEFAULT_ABBREVIATE
 import kash.MoneyFormatterOptions.Companion.DEFAULT_DECIMALS_ABBREVIATED
 import kash.MoneyFormatterOptions.Companion.DEFAULT_DECIMALS_UNABBREVIATED
 import kash.MoneyFormatterOptions.Companion.DEFAULT_DECIMAL_SEPARATOR
+import kash.MoneyFormatterOptions.Companion.DEFAULT_ENFORCE_DECIMALS
+import kash.MoneyFormatterOptions.Companion.DEFAULT_POSTFIX
 import kash.MoneyFormatterOptions.Companion.DEFAULT_PREFIX
 import kash.MoneyFormatterOptions.Companion.DEFAULT_THOUSAND_SEPERATOR
 import kotlinx.serialization.Serializable
@@ -13,8 +16,6 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
-import kotlin.math.pow
-import kotlin.math.round
 
 @Serializable
 data class Money(
@@ -77,70 +78,29 @@ data class Money(
     @JsName("ratio")
     operator fun div(other: Money) = MoneyRatio((amount.toDouble() / other.amount), currency, other.currency)
 
-    private fun beautify(amount: Double): String {
-        if (amount.toString().endsWith(".0")) {
-            return amount.toInt().toString()
-        }
-        return amount.toString()
-    }
-
-    private fun processPrefix(prefix: String) = when (prefix) {
-        PREFIX.CURRENCY_LOCAL_SYMBOL -> currency.localSymbol
-        PREFIX.CURRENCY_GLOBAL_SYMBOL -> currency.globalSymbol
-        PREFIX.CURRENCY_NAME -> currency.name
-        else -> prefix
-    }
-
     fun toFormattedString(): String = toFormattedString(MoneyFormatterOptions())
+
+    fun format(formatter: Formatter<Money>) = formatter.format(this)
 
     @JsName("_ignore_toFormattedString")
     fun toFormattedString(
         abbreviate: Boolean = DEFAULT_ABBREVIATE,
         prefix: String = DEFAULT_PREFIX,
+        postfix: String = DEFAULT_POSTFIX,
         decimals: Int? = null,
+        enforceDecimals: Boolean = DEFAULT_ENFORCE_DECIMALS,
         decimalSeparator: String = DEFAULT_DECIMAL_SEPARATOR,
         thousandsSeparator: String = DEFAULT_THOUSAND_SEPERATOR
-    ) = toFormattedString(
-        MoneyFormatterOptions(
-            abbreviate,
-            prefix,
-            decimals = decimals ?: if (abbreviate) DEFAULT_DECIMALS_ABBREVIATED else DEFAULT_DECIMALS_UNABBREVIATED,
-            decimalSeparator,
-            thousandsSeparator
-        )
-    )
+    ) = MoneyFormatter(
+        abbreviate,
+        prefix,
+        postfix,
+        decimals = decimals ?: if (abbreviate) DEFAULT_DECIMALS_ABBREVIATED else DEFAULT_DECIMALS_UNABBREVIATED,
+        enforceDecimals,
+        decimalSeparator,
+        thousandsSeparator
+    ).format(this)
 
     @JsName("toFormattedStringWith")
-    fun toFormattedString(options: MoneyFormatterRawOptions): String = if (options.abbreviate == true) {
-        val opt = options.toFormatterOptions().copy(
-            decimals = options.decimals ?: DEFAULT_DECIMALS_ABBREVIATED
-        )
-        val value = amount.toDouble() / currency.lowestDenomination
-        val (postfix, divider) = when {
-            value < 1_000 -> "" to 1
-            value >= 1_000 && value < 1_000_000 -> "K" to 1_000
-            value >= 1_000_000 && value < 1_000_000_000 -> "M" to 1_000_000
-            else -> "B" to 1_000_000_000
-        }
-        val rounded = round(value * opt.rounder / divider) / opt.rounder
-        "${processPrefix(opt.prefix)} ${beautify(rounded)}$postfix"
-    } else {
-        val opt = options.toFormatterOptions().copy(
-            decimals = options.decimals ?: DEFAULT_DECIMALS_UNABBREVIATED
-        )
-        val value = round(amount.toDouble() * opt.rounder / currency.lowestDenomination) / opt.rounder
-        val splits = value.toString().split('.')
-        var characteristic = splits[0]
-        var mantisa = splits.getOrElse(1) { "0" }
-        mantisa = if (mantisa.toDouble() == 0.0) "" else mantisa
-        characteristic = characteristic.toCharArray().toList().reversed()
-            .chunked(3).reversed().joinToString(separator = opt.thousandsSeparator.toString()) {
-                it.reversed().joinToString(separator = "")
-            }
-        if (mantisa == "") {
-            "${processPrefix(opt.prefix)} $characteristic"
-        } else {
-            "${processPrefix(opt.prefix)} $characteristic${opt.decimalSeparator}$mantisa"
-        }
-    }
+    fun toFormattedString(options: MoneyFormatterRawOptions): String = MoneyFormatter(options.toFormatterOptions()).format(this)
 }

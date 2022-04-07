@@ -1,7 +1,7 @@
 import expect.expect
 import kash.GBP
 import kash.MXN
-import kash.PREFIX
+import kash.Template
 import kash.TZS
 import kotlin.test.Test
 
@@ -20,10 +20,10 @@ class MoneyRepresentationTest {
     @Test
     fun should_easily_abbreviate_thousands_in_mexican_peso() {
         expect(3000.MXN.toFormattedString()).toBe("$ 3K")
-        expect(4200.MXN.toFormattedString(prefix = PREFIX.CURRENCY_NAME)).toBe("MXN 4.2K")
-        expect(4231.MXN.toFormattedString(prefix = PREFIX.CURRENCY_NAME, decimals = 1)).toBe("MXN 4.2K")
-        expect(4231.MXN.toFormattedString(prefix = PREFIX.CURRENCY_NAME, decimals = 0)).toBe("MXN 4K")
-        expect(4231.MXN.toFormattedString(prefix = PREFIX.CURRENCY_NAME)).toBe("MXN 4.2K")
+        expect(4200.MXN.toFormattedString(prefix = "${Template.CURRENCY_NAME} ")).toBe("MXN 4.2K")
+        expect(4231.MXN.toFormattedString(prefix = "${Template.CURRENCY_NAME} ", decimals = 1)).toBe("MXN 4.2K")
+        expect(4231.MXN.toFormattedString(prefix = "${Template.CURRENCY_NAME} ", decimals = 0)).toBe("MXN 4K")
+        expect(4231.MXN.toFormattedString(prefix = "${Template.CURRENCY_NAME} ")).toBe("MXN 4.2K")
     }
 
     @Test

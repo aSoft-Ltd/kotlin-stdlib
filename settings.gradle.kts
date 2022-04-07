@@ -41,6 +41,7 @@ includeSubs("live", "mvivm/live", "core", "react", "coroutines")// "compose")
 includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "coroutines")// "compose")
 includeSubs("viewmodel-test", "mvivm/viewmodel/test", "core", "expect")
 
+includeRoot("formatter","formatter")
 includeSubs("identifier", "identifier", "core", "generators")
 
 includeSubs("color", "aesthetics/color", "core", "css")// "compose")
