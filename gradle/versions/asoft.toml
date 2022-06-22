@@ -1,0 +1,15 @@
+[versions]
+stdlib = "0.2.41"
+foundation = "1.5.0"
+
+[libraries]
+expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }
+expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "foundation" }
+kotlinx-browser = { module = "tz.co.asoft:kotlinx-browser", version.ref = "foundation" }
+kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }
+logging-console = { module = "tz.co.asoft:logging-console", version.ref = "foundation" }
+
+[plugins]
+applikation = { id = "tz.co.asoft.applikation", version.ref = "foundation" }
+library = { id = "tz.co.asoft.library", version.ref = "foundation" }
+deploy = { id = "tz.co.asoft.deploy", version.ref = "foundation" }

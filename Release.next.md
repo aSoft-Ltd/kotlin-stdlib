@@ -1,0 +1,3 @@
+- Bumped kotlin from 1.6.10 to 1.6.20-RC
+- Deprecated Money toShortString & toLongString in favour of toFormattedString
+- Removed compose artifacts (Waiting for them to catch up to 1.6.20-RC)
