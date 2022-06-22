@@ -7,43 +7,26 @@ plugins {
 kotlin {
     jvm { library(); withJava() }
     js(IR) { library() }
-    val nativeTargets = nativeTargets(true)
+    nativeTargets(true)
 
     sourceSets {
-        val commonMain by getting {}
+        val commonMain by getting {
+            dependencies {
+                api(asoft.functions)
+                api(asoft.koncurrent.primitives.core)
+            }
+        }
 
         val commonTest by getting {
             dependencies {
                 implementation(asoft.expect.coroutines)
-            }
-        }
-
-        val nativeMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val nativeTest by creating {
-            dependsOn(nativeMain)
-            dependsOn(commonTest)
-        }
-
-        for (target in nativeTargets) {
-            val main by target.compilations.getting {
-                defaultSourceSet {
-                    dependsOn(nativeMain)
-                }
-            }
-
-            val test by target.compilations.getting {
-                defaultSourceSet {
-                    dependsOn(nativeMain)
-                    dependsOn(main.defaultSourceSet)
-                }
+                implementation(asoft.koncurrent.primitives.mock)
             }
         }
     }
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(), description = "An multiplatform representation of a Live<T> object"
+    version = asoft.versions.stdlib.get(),
+    description = "An multiplatform representation of a Live<T> object"
 )

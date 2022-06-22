@@ -1,11 +1,15 @@
 import expect.expect
-import live.WATCH_MODE
+import koncurrent.MockExecutor
+import koncurrent.Promise
+import koncurrent.setTimeout
 import live.WatchMode
 import live.liveOf
 import live.mutableLiveOf
 import kotlin.test.Test
 
 class InteroperabilityTest {
+
+    val executor = MockExecutor()
 
     @Test
     fun should_be_able_to_get_a_live_value() {
@@ -21,10 +25,8 @@ class InteroperabilityTest {
         globalThis.live = pLive
         val live = globalThis.live
         var number = 0
-        live.watch(WATCH_MODE.CASUALLY) { int: Int ->
-            number = int
-            console.log("Watching: $int")
-        }
+        val func = js("""function(x){ number=x; console.log('Watching '+x); }""")
+        live.watch(func, WatchMode.Casually, executor)
         expect(number).toBe(0)
         live.value = 456
         expect(number).toBe(456)
@@ -40,12 +42,26 @@ class InteroperabilityTest {
         globalThis.live = pLive
         val live = globalThis.live
         var number: Int = 0
-        live.watch(WATCH_MODE.EAGERLY) { int: Int ->
-            number = int
-            console.log("Watching")
-        }
+        val func = js("""function(x){ number=x; console.log('Watching '+x); }""")
+        live.watch(func, WatchMode.Eagerly, executor)
         expect(number).toBe(1234)
         live.value = 456
         live.value = 789
+    }
+
+    @Test
+    fun should_be_able_to_watch_without_passing_watch_mode() {
+        val pLive = liveOf(1234)
+        globalThis.live = pLive
+        val live = globalThis.live
+        var number: Int = 0
+        val func = js("""function(x){ number=x; console.log('Watching '+x); }""")
+        live.watch(func)
+        live.value = 456
+        live.value = 789
+
+        return Promise { res, _ ->
+            setTimeout({ res(0) }, 3000)
+        }.unsafeCast<Unit>()
     }
 }

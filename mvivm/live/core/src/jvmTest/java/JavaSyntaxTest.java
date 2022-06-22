@@ -1,14 +1,17 @@
-import static expect.CommonBuildersKt.expect;
-
+import koncurrent.MockExecutors;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import live.MutableLive;
 import live.WatchMode;
-import live.Watcher;
+
+import static expect.ExpectBuilders.*;
 
 public class JavaSyntaxTest {
+
+    private final Executor executor = MockExecutors.create();
 
     private void print(final int watcherNo, final int value) {
         System.out.println("Watcher " + watcherNo + ": " + value);
@@ -21,7 +24,7 @@ public class JavaSyntaxTest {
         var watcher1 = liveInt.watch(x -> {
             value1.set(x);
             print(1, x);
-        });
+        }, executor);
         expect(value1.get()).toBe(0);
         liveInt.setValue(2);
         expect(value1.get()).toBe(2);
@@ -29,10 +32,10 @@ public class JavaSyntaxTest {
         expect(value1.get()).toBe(3);
 
         final var value2 = new AtomicInteger(0);
-        var watcher2 = liveInt.watch(WatchMode.EAGERLY, x -> {
+        var watcher2 = liveInt.watch(x -> {
             value2.set(x);
             print(2, x);
-        });
+        }, WatchMode.Eagerly, executor);
         expect(value2.get()).toBe(3);
         liveInt.setValue(4);
         expect(value1.get()).toBe(4);

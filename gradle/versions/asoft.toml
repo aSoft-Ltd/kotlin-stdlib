@@ -1,10 +1,16 @@
 [versions]
-stdlib = "0.2.41"
-foundation = "1.5.0"
+stdlib = "0.2.42"
+foundation = "1.5.1"
 
 [libraries]
 expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }
 expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "foundation" }
+
+functions = { module = "tz.co.asoft:functions", version.ref = "foundation" }
+
+koncurrent-primitives-core = { module = "tz.co.asoft:koncurrent-primitives-core", version.ref = "foundation" }
+koncurrent-primitives-mock = { module = "tz.co.asoft:koncurrent-primitives-mock", version.ref = "foundation" }
+
 kotlinx-browser = { module = "tz.co.asoft:kotlinx-browser", version.ref = "foundation" }
 kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }
 logging-console = { module = "tz.co.asoft:logging-console", version.ref = "foundation" }

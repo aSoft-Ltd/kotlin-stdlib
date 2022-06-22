@@ -1,14 +1,18 @@
 import expect.expect
+import koncurrent.MockExecutor
 import live.*
 import kotlin.test.Test
 
 class KotlinJvmSyntaxTest {
+
+    val executor = MockExecutor()
+
     @Test
     fun should_have_a_valid_syntax() {
         val liveInt = mutableLiveOf(1)
         val readableLive: Live<Int> = liveInt
         var counter1 = 0
-        val watcher1 = readableLive.watch(WatchMode.EAGERLY) {
+        val watcher1 = readableLive.watch(mode = WatchMode.Eagerly, executor) {
             counter1++
         }
         expect(counter1).toBe(1)
@@ -16,7 +20,7 @@ class KotlinJvmSyntaxTest {
         liveInt.value = 3
         var counter2 = 0
         expect(counter1).toBe(3)
-        val watcher2 = liveInt.watch(WatchMode.EAGERLY) {
+        val watcher2 = liveInt.watch(WatchMode.Eagerly, executor) {
             counter2++
         }
         expect(counter2).toBe(1)

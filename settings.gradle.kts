@@ -1,12 +1,5 @@
 pluginManagement {
     enableFeaturePreview("VERSION_CATALOGS")
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.namespace == "com.android") {
-                useModule("com.android.tools.build:gradle:${requested.version}")
-            }
-        }
-    }
 
     repositories {
         google()
@@ -38,15 +31,15 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 rootProject.name = "stdlib"
 
 includeSubs("live", "mvivm/live", "core", "react", "coroutines")// "compose")
-includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "coroutines")// "compose")
-includeSubs("viewmodel-test", "mvivm/viewmodel/test", "core", "expect")
-
-includeRoot("formatter","formatter")
-includeSubs("identifier", "identifier", "core", "generators")
-
-includeSubs("color", "aesthetics/color", "core", "css")// "compose")
-includeSubs("theme", "aesthetics/theme", "core", "css", "react")//"compose",)
-includeSubs("reakt", "reakt", "core", "web", "icons")
-
-includeSubs("kash", "finance/kash", "core")
-includeSubs("payments-requests", "finance/payments/requests", "core")
+//includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "coroutines")// "compose")
+//includeSubs("viewmodel-test", "mvivm/viewmodel/test", "core", "expect")
+//
+//includeRoot("formatter","formatter")
+//includeSubs("identifier", "identifier", "core", "generators")
+//
+//includeSubs("color", "aesthetics/color", "core", "css")// "compose")
+//includeSubs("theme", "aesthetics/theme", "core", "css", "react")//"compose",)
+//includeSubs("reakt", "reakt", "core", "web", "icons")
+//
+//includeSubs("kash", "finance/kash", "core")
+//includeSubs("payments-requests", "finance/payments/requests", "core")

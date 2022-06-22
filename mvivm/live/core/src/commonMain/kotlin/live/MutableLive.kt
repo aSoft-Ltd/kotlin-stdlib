@@ -1,8 +1,9 @@
 @file:JsExport
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:Suppress("WRONG_EXPORTED_DECLARATION", "NON_EXPORTABLE_TYPE")
 
 package live
 
+import live.internal.MutableLiveImpl
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.JvmName

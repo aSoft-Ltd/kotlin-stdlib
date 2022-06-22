@@ -3,6 +3,7 @@
 
 package live
 
+import live.internal.MutableLiveImpl
 import kotlin.js.JsExport
 import kotlin.jvm.JvmName
 
