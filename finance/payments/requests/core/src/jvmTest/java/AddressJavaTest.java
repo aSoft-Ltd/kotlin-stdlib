@@ -1,4 +1,4 @@
-import static expect.Builders.expect;
+import static expect.ExpectBuilders.*;
 
 import identifier.Email;
 import identifier.Phone;

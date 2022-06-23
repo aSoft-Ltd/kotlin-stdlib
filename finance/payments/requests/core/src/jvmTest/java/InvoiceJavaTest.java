@@ -7,7 +7,7 @@ import kotlinx.datetime.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static expect.Builders.expect;
+import static expect.ExpectBuilders.*;
 
 public class InvoiceJavaTest {
 

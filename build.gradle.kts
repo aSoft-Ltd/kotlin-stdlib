@@ -5,6 +5,7 @@ import java.util.*
 plugins {
     alias(androidx.plugins.library) apply false
     alias(jetbrains.plugins.kotlin.multiplatform) apply false
+    alias(jetbrains.plugins.kotlin.serialization) apply false
     alias(jetbrains.plugins.compose) apply false
     alias(asoft.plugins.library) apply false
     alias(nexus.plugins.publish)

@@ -1,5 +1,7 @@
 import identifier.EmailGenerator
 import expect.expect
+import expect.expectArray
+import expect.expectCollection
 import kotlin.test.Test
 
 class EmailGeneratorTest {
@@ -8,7 +10,7 @@ class EmailGeneratorTest {
     fun should_generate_valid_emails() {
         val emails = EmailGenerator.random(20)
         println(emails)
-        expect(emails).toBeOfSize(20)
+        expectArray(emails).toBeOfSize(20)
     }
 
     @Test
