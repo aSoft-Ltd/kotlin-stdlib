@@ -1,5 +1,5 @@
 pluginManagement {
-    enableFeaturePreview("VERSION_CATALOGS")
+    enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
     repositories {
         google()
@@ -9,8 +9,10 @@ pluginManagement {
 
     dependencyResolutionManagement {
         versionCatalogs {
-            file("gradle/versions").listFiles().map { it.nameWithoutExtension }.forEach {
-                create(it) { from(files("gradle/versions/$it.toml")) }
+            file("gradle/versions").listFiles().map {
+                it.nameWithoutExtension to it.absolutePath
+            }.forEach { (name, path) ->
+                create(name) { from(files(path)) }
             }
         }
     }
@@ -31,9 +33,9 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 rootProject.name = "stdlib"
 
 includeSubs("live", "mvivm/live", "core", "react", "coroutines")// "compose")
-//includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "coroutines")// "compose")
-//includeSubs("viewmodel-test", "mvivm/viewmodel/test", "core", "expect")
-//
+includeSubs("viewmodel", "mvivm/viewmodel", "core", "react", "coroutines")// "compose")
+includeSubs("viewmodel-test", "mvivm/viewmodel/test", "core", "expect")
+
 //includeRoot("formatter","formatter")
 //includeSubs("identifier", "identifier", "core", "generators")
 //

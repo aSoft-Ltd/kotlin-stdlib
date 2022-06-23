@@ -12,8 +12,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":viewmodel-core"))
-                api(project(":live-coroutines"))
+                api(projects.viewmodelCore)
+                api(projects.liveCoroutines)
             }
         }
 
@@ -26,6 +26,5 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
-    description = "Bindings for Live<S> object to be used with coroutines"
+    version = asoft.versions.stdlib.get(), description = "Bindings for Live<S> object to be used with coroutines"
 )

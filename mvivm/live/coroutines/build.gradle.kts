@@ -11,8 +11,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":live-core"))
+                api(projects.liveCore)
                 api(kotlinx.coroutines.core)
+                api(asoft.koncurrent.primitives.coroutines)
             }
         }
 

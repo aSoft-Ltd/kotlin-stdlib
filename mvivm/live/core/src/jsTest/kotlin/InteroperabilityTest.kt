@@ -26,7 +26,7 @@ class InteroperabilityTest {
         val live = globalThis.live
         var number = 0
         val func = js("""function(x){ number=x; console.log('Watching '+x); }""")
-        live.watch(func, WatchMode.Casually, executor)
+        live.watchWithModeAndExecutor(func, WatchMode.Casually, executor)
         expect(number).toBe(0)
         live.value = 456
         expect(number).toBe(456)
@@ -43,7 +43,7 @@ class InteroperabilityTest {
         val live = globalThis.live
         var number: Int = 0
         val func = js("""function(x){ number=x; console.log('Watching '+x); }""")
-        live.watch(func, WatchMode.Eagerly, executor)
+        live.watchWithModeAndExecutor(func, WatchMode.Eagerly, executor)
         expect(number).toBe(1234)
         live.value = 456
         live.value = 789
@@ -61,7 +61,7 @@ class InteroperabilityTest {
         live.value = 789
 
         return Promise { res, _ ->
-            setTimeout({ res(0) }, 3000)
+            setTimeout({ res(0) }, 500)
         }.unsafeCast<Unit>()
     }
 }

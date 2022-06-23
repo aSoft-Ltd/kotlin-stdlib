@@ -2,34 +2,25 @@
 
 package logging
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import logging.TodoViewModel.Intent
 import logging.TodoViewModel.State
 import viewmodel.ViewModel
 import viewmodel.ViewModelConfig
 import kotlin.jvm.JvmOverloads
 
 class TodoViewModel @JvmOverloads constructor(
-    private val config: ViewModelConfig = ViewModelConfig()
-) : ViewModel<Intent, State>(State.Init, config) {
+    private val config: ViewModelConfig<State> = ViewModelConfig(State.Init)
+) : ViewModel<State>(config) {
 
     sealed interface State {
         object Init : State
         data class ShowTodo(val todo: Todo) : State
     }
 
-    sealed interface Intent {
-        data class ViewTodo(val todo: Todo) : Intent
-        object ReInit : Intent
+    fun showTodo(todo: Todo) = executor.execute {
+        ui.value = State.ShowTodo(todo)
     }
 
-    override fun CoroutineScope.execute(i: Intent): Any = launch {
-        delay(10)
-        ui.value = when (i) {
-            is Intent.ViewTodo -> State.ShowTodo(i.todo)
-            Intent.ReInit -> State.Init
-        }
+    fun reInit() {
+        ui.value = State.Init
     }
 }

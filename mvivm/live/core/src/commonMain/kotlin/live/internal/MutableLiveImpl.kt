@@ -1,7 +1,6 @@
 package live.internal
 
 import koncurrent.Executor
-import koncurrent.Executors
 import live.*
 
 internal class MutableLiveImpl<S>(state: S) : AbstractLive<S>(), MutableLive<S> {
@@ -15,12 +14,13 @@ internal class MutableLiveImpl<S>(state: S) : AbstractLive<S>(), MutableLive<S> 
 
     override fun stopAll() = watchers.clear()
 
-    override fun watch(callback: (state: S) -> Unit, mode: WatchMode?, executor: Executor?): Watcher {
-        val m = mode ?: WatchMode.Default
-        val e = executor ?: SynchronousExecutor.Default
-        val watcher = WatcherImpl(watchers, e, callback)
+    override fun watchRaw(callback: ((state: S) -> Unit)?, mode: WatchMode?, executor: Executor?): Watcher {
+        val cb = callback ?: throw IllegalStateException("A callback to a live object must not be null or undefined")
+        val md = mode ?: WatchMode.Default
+        val ex = executor ?: SynchronousExecutor.Default
+        val watcher = WatcherImpl(watchers, ex, cb)
         watchers.add(watcher)
-        if (m == WatchMode.Eagerly) watcher.execute(value)
+        if (md == WatchMode.Eagerly) watcher.execute(value)
         return watcher
     }
 }

@@ -21,8 +21,11 @@ interface Live<out S> {
 
 
     /**
-     * Watch the value as it changes and be updated via a [consumer]
+     * Subscribes to this object, to get [Live] updates of the new [value]
      *
+     * @param [consumer] - The function to be executed when this [value] changes
+     *
+     * @param [mode] - The subscription mode on how to get values
      * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
      *
      * [executor] tells in
@@ -69,8 +72,41 @@ interface Live<out S> {
      *
      * @return a [Watcher]
      */
+    @JsName("watchWithModeAndExecutor")
     @JvmSynthetic
-    fun watch(callback: (state: S) -> Unit, mode: WatchMode?, executor: Executor?): Watcher
+    fun watch(callback: (state: S) -> Unit, mode: WatchMode, executor: Executor): Watcher
+
+    /**
+     * Watch the value as it changes and be updated via a [callback]
+     *
+     * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
+     *
+     * @return a [Watcher]
+     */
+    @JsName("watchWithExecutor")
+    @JvmSynthetic
+    fun watch(callback: (state: S) -> Unit, executor: Executor): Watcher
+
+    /**
+     * Watch the value as it changes and be updated via a [callback]
+     *
+     * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
+     *
+     * @return a [Watcher]
+     */
+    @JsName("watchWithMode")
+    @JvmSynthetic
+    fun watch(callback: (state: S) -> Unit, mode: WatchMode): Watcher
+
+    /**
+     * Watch the value as it changes and be updated via a [callback]
+     *
+     * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
+     *
+     * @return a [Watcher]
+     */
+    @JvmSynthetic
+    fun watch(callback: (state: S) -> Unit): Watcher
 
     /**
      * Stops all [Watcher]s from watching this [Live] [value]

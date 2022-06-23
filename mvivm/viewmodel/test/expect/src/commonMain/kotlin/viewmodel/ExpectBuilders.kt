@@ -2,22 +2,18 @@
 
 package viewmodel
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.withContext
 import live.WatchMode
+import live.watch
+import viewmodel.internal.ViewModelExpectationImpl
+import viewmodel.internal.ViewModelStatesExpectationImpl
 import kotlin.jvm.JvmName
-import kotlin.jvm.JvmSynthetic
 
-fun <I, S, V : ViewModel<I, S>> expect(viewModel: V) = ViewModelExpectation(viewModel)
+fun <S, V : ViewModel<S>> expect(viewModel: V) = ViewModelExpectationImpl(viewModel)
 
-@JvmSynthetic
-suspend fun <I, S> ViewModel<I, S>.expect(intent: I): ViewModelStateExpectation<S> {
+inline fun <S, V : ViewModel<S>> V.expect(builder: V.() -> Unit): ViewModelStatesExpectationImpl<S> {
     val states = mutableListOf<S>()
-    val watcher = ui.watch(WatchMode.CASUALLY) { states.add(it) }
-    coroutineScope { start(intent) }
+    val watcher = ui.watch(WatchMode.Casually) { states.add(it) }
+    builder()
     watcher.stop()
-    return ViewModelStateExpectation(states)
+    return ViewModelStatesExpectationImpl(states)
 }

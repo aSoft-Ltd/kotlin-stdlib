@@ -13,24 +13,26 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx.coroutines.core)
                 api(asoft.logging.console)
-                api(project(":live-core"))
+                api(projects.liveCore)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(project(":viewmodel-test-expect"))
-                implementation(kotlinx.coroutines.test)
-                implementation(asoft.expect.coroutines)
+                implementation(projects.viewmodelTestExpect)
             }
         }
 
         val androidMain by getting {
             dependencies {
                 api(androidx.lifecycle.viewmodel.ktx)
-                api(kotlinx.coroutines.android)
+            }
+        }
+
+        val androidTest by getting {
+            dependencies {
+                implementation(asoft.logging.test.android)
             }
         }
 
@@ -68,5 +70,6 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(), description = "A multiplatfrom library for authoring viewmodel in an MVIVM architecture"
+    version = asoft.versions.stdlib.get(),
+    description = "A multiplatfrom library for authoring viewmodel in an MVIVM architecture"
 )

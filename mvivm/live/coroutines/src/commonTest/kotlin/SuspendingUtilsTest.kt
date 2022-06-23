@@ -14,7 +14,7 @@ class SuspendingUtilsTest {
     fun can_watch_eagerly_while_suspending() = runTest {
         val live = mutableLiveOf("Stuff 1")
         var stuff = ""
-        val watcher = live.watch(this, WatchMode.EAGERLY) {
+        val watcher = live.watch(this, WatchMode.Eagerly) {
             stuff = it
         }
         delay(delayTime)
@@ -35,7 +35,7 @@ class SuspendingUtilsTest {
     fun can_watch_casually_while_suspending() = runTest {
         val live = mutableLiveOf("Stuff 1")
         var stuff = ""
-        val watcher = live.watch(this, WatchMode.CASUALLY) {
+        val watcher = live.watch(this, WatchMode.Casually) {
             stuff = it
             delay(delayTime)
         }
@@ -57,7 +57,7 @@ class SuspendingUtilsTest {
     fun can_cancel_watcher_by_canceling_job_of_an_eager_watch() = runTest {
         val live = mutableLiveOf("Stuff 1")
         var stuff = ""
-        val job = watch(live, WatchMode.EAGERLY) {
+        val job = watch(live, WatchMode.Eagerly) {
             stuff = it
         }
         delay(delayTime)
@@ -78,7 +78,7 @@ class SuspendingUtilsTest {
     fun can_cancel_watcher_by_canceling_job_of_a_casual_watcher() = runTest {
         val live = mutableLiveOf("Stuff 1")
         var stuff = ""
-        val job = watch(live, WatchMode.CASUALLY) {
+        val job = watch(live, WatchMode.Casually) {
             stuff = it
         }
         delay(delayTime)

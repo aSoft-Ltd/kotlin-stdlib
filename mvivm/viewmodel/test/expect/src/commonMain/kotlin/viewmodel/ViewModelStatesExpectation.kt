@@ -4,7 +4,7 @@ import expect.BasicExpectation
 import kotlin.math.sign
 import kotlin.test.assertEquals
 
-interface ViewModelStateAssertion<S> : BasicExpectation<List<S>> {
+interface ViewModelStatesExpectation<S> : BasicExpectation<List<S>> {
 
     fun toBeIn(state: S) {
         assertEquals(

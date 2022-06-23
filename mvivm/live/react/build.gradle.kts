@@ -9,7 +9,7 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(project(":live-core"))
+                api(projects.liveCore)
                 api(project.dependencies.platform(kotlinw.bom))
                 api(kotlinw.react.core)
             }

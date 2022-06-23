@@ -9,11 +9,14 @@ expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "f
 functions = { module = "tz.co.asoft:functions", version.ref = "foundation" }
 
 koncurrent-primitives-core = { module = "tz.co.asoft:koncurrent-primitives-core", version.ref = "foundation" }
+koncurrent-primitives-coroutines = { module = "tz.co.asoft:koncurrent-primitives-coroutines", version.ref = "foundation" }
 koncurrent-primitives-mock = { module = "tz.co.asoft:koncurrent-primitives-mock", version.ref = "foundation" }
 
 kotlinx-browser = { module = "tz.co.asoft:kotlinx-browser", version.ref = "foundation" }
 kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }
+
 logging-console = { module = "tz.co.asoft:logging-console", version.ref = "foundation" }
+logging-test-android = { module = "tz.co.asoft:logging-test-android", version.ref = "foundation" }
 
 [plugins]
 applikation = { id = "tz.co.asoft.applikation", version.ref = "foundation" }
