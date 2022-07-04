@@ -8,8 +8,8 @@ import viewmodel.ViewModelConfig
 import kotlin.jvm.JvmOverloads
 
 class TodoViewModel @JvmOverloads constructor(
-    private val config: ViewModelConfig<State> = ViewModelConfig(State.Init)
-) : ViewModel<State>(config) {
+    private val config: ViewModelConfig<*> = ViewModelConfig()
+) : ViewModel<State>(config.of(State.Init)) {
 
     sealed interface State {
         object Init : State

@@ -2,52 +2,50 @@
 
 package viewmodel
 
-import functions.Function
 import koncurrent.Executor
-import live.SynchronousExecutor
+import koncurrent.SynchronousExecutor
 import logging.ConsoleAppender
 import logging.Logger
-import viewmodel.internal.ViewModelConfigImpl
+import viewmodel.internal.StatefulViewModelConfigImpl
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.*
 
 @JsExport
-interface ViewModelConfig<out S> {
-    val initial: S
+interface ViewModelConfig<out A> {
+    val api: A
     val executor: Executor
     val logger: Logger
 
-    @JsName("_ignore_map")
-    fun <R> map(transform: Function<S, R>): ViewModelConfig<R>
+    fun <R> map(transformer: (A) -> R): ViewModelConfig<R>
 
-    @JvmSynthetic
-    fun <R> map(transform: (S) -> R): ViewModelConfig<R>
+    fun <S> of(state: S): StatefulViewModelConfig<A, S>
 
     companion object {
         @JvmField
         val DEFAULT_LOGGER = Logger(ConsoleAppender())
 
         @JvmField
-        val DEFAULT_EXECUTOR = SynchronousExecutor.Default
+        val DEFAULT_EXECUTOR = SynchronousExecutor
 
-        @JsName("of")
-        @JvmName("create")
+
+        @JsName("ofService")
+        @JvmName("ofService")
         @JvmOverloads
         @JvmStatic
-        operator fun <S> invoke(
-            initial: S,
+        operator fun <A> invoke(
+            api: A,
             executor: Executor = DEFAULT_EXECUTOR,
             logger: Logger = DEFAULT_LOGGER
-        ): ViewModelConfig<S> = ViewModelConfigImpl(initial, executor, logger)
+        ): ViewModelConfig<A> = StatefulViewModelConfigImpl(api, Unit, executor, logger)
 
-        @JsName("create")
-        @JvmName("create")
+        @JsName("of")
+        @JvmName("of")
         @JvmOverloads
         @JvmStatic
         operator fun invoke(
             executor: Executor = DEFAULT_EXECUTOR,
             logger: Logger = DEFAULT_LOGGER
-        ): ViewModelConfig<*> = ViewModelConfigImpl(initial = Unit, executor, logger)
+        ): ViewModelConfig<*> = StatefulViewModelConfigImpl(Unit, Unit, executor, logger)
     }
 }

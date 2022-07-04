@@ -2,7 +2,7 @@ package viewmodel
 
 import viewmodel.CounterViewModel.State
 
-class CounterViewModel : ViewModel<State>(State(0)) {
+class CounterViewModel(config: ViewModelConfig<*> = ViewModelConfig()) : ViewModel<State>(config.of(State(0))) {
 
     data class State(val value: Int)
 
