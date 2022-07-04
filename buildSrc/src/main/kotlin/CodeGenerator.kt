@@ -87,10 +87,10 @@ open class CodeGenerator : DefaultTask() {
 //            output.appendText(if (currencies.last() == entry) ";" else ",")
             output.appendText("\n\n")
         }
-        output.appendText(listOf("UInt", "ULong", "Double").joinToString("\n") { type ->
+        output.appendText(listOf(/* "UInt", "ULong", */"Double").joinToString("\n") { type ->
             """
             |    @JsName("of${type}Value")
-            |    fun of(amount: $type) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
+            |    fun of(amount: $type) = Money((amount.toDouble() * lowestDenomination).toULong(), this)
             """.trimMargin()
         })
         output.appendText("\n")
@@ -98,7 +98,7 @@ open class CodeGenerator : DefaultTask() {
             """
             |    @JvmSynthetic
             |    @JsName("of${type}Value")
-            |    fun of(amount: $type) = Money((amount.toDouble() * lowestDenomination).toInt(), this)
+            |    fun of(amount: $type) = Money((amount.toULong() * lowestDenomination.toULong()), this)
             """.trimMargin()
         })
         output.appendText("\n}")
@@ -125,7 +125,7 @@ open class CodeGenerator : DefaultTask() {
         )
         for (curr in currencyNames) {
             val name = curr["cc"]
-            for (type in listOf("Double", "UInt", "ULong")) {
+            for (type in listOf("Double" /*"UInt", "ULong"*/)) {
                 output.appendText(
                     """
                     /**${curr["name"]}*/
@@ -153,7 +153,7 @@ open class CodeGenerator : DefaultTask() {
         )
         for (curr in currencyNames) {
             val name = curr["cc"]
-            for (type in listOf("Double", "UInt", "ULong", "Int", "Long")) {
+            for (type in listOf("Double", /* "UInt", "ULong", */ "Int", "Long")) {
                 output.appendText(
                     """
                     /**${curr["name"]}*/

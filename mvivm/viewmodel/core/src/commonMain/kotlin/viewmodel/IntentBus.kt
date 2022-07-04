@@ -1,10 +1,11 @@
 package viewmodel
 
 import koncurrent.Executor
+import koncurrent.SynchronousExecutor
 import live.*
 import kotlin.jvm.JvmOverloads
 
-open class IntentBus<I> @JvmOverloads constructor(val executor: Executor = SynchronousExecutor.Default) {
+open class IntentBus<I> @JvmOverloads constructor(val executor: Executor = SynchronousExecutor) {
     private val INTENT = mutableLiveOf<I?>(null)
 
     fun post(i: I) {

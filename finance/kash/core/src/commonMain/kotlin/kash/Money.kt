@@ -1,4 +1,5 @@
 @file:JsExport
+@file:UseSerializers(LongAsStringSerializer::class)
 
 package kash
 
@@ -11,7 +12,10 @@ import kash.MoneyFormatterOptions.Companion.DEFAULT_ENFORCE_DECIMALS
 import kash.MoneyFormatterOptions.Companion.DEFAULT_POSTFIX
 import kash.MoneyFormatterOptions.Companion.DEFAULT_PREFIX
 import kash.MoneyFormatterOptions.Companion.DEFAULT_THOUSAND_SEPERATOR
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
+import kotlinx.serialization.builtins.LongAsStringSerializer
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.JvmStatic
@@ -20,63 +24,61 @@ import kotlin.jvm.JvmSynthetic
 @Serializable
 data class Money(
     /** In the lowest denomination */
-    val amount: Int,
+    @SerialName("amount") val centsAsLong: ULong,
     @Serializable(with = CurrencySerializer::class)
     val currency: Currency
 ) {
 
+    val centsAsInt by lazy { centsAsLong.toInt() }
+
+    val centsAsDouble by lazy { centsAsLong.toDouble() }
+
+    val amountAsLong by lazy { (centsAsLong.toLong() / currency.lowestDenomination) }
+
+    val amountAsInt by lazy { (centsAsLong.toInt() / currency.lowestDenomination) }
+
+    val amountAsDouble by lazy { (centsAsLong.toDouble() / currency.lowestDenomination) }
+
     companion object {
-
-        @JvmStatic
-        @JsName("fromUInt")
-        fun of(amount: UInt, currency: Currency) = Money((amount.toDouble() * currency.lowestDenomination).toInt(), currency)
-
-
-        @JvmStatic
-        @JsName("fromULong")
-        fun of(amount: ULong, currency: Currency) = Money((amount.toDouble() * currency.lowestDenomination).toInt(), currency)
-
-
         @JvmStatic
         @JsName("fromDouble")
-        fun of(amount: Double, currency: Currency) = Money((amount * currency.lowestDenomination).toInt(), currency)
+        fun of(amount: Double, currency: Currency) = Money((amount * currency.lowestDenomination).toULong(), currency)
 
 
         @JvmStatic
         @JvmSynthetic
         @JsName("fromInt")
-        fun of(amount: Int, currency: Currency) = Money((amount.toDouble() * currency.lowestDenomination).toInt(), currency)
+        fun of(amount: Int, currency: Currency) = Money((amount.toDouble() * currency.lowestDenomination).toULong(), currency)
 
 
         @JvmStatic
         @JvmSynthetic
         @JsName("fromLong")
-        fun of(amount: Long, currency: Currency) = Money((amount.toDouble() * currency.lowestDenomination).toInt(), currency)
-
-
-        @JvmStatic
-        @JvmSynthetic
-        @JsName("fromNumber")
-        fun of(amount: Number, currency: Currency) = Money((amount.toDouble() * currency.lowestDenomination).toInt(), currency)
-
+        fun of(amount: Long, currency: Currency) = Money((amount.toDouble() * currency.lowestDenomination).toULong(), currency)
     }
 
     operator fun plus(other: Money): Money {
         if (other.currency != currency) error("Can't add ${currency.name} to ${other.currency.name}")
-        return Money(amount + other.amount, currency)
+        return Money(centsAsLong + other.centsAsLong, currency)
     }
 
     operator fun minus(other: Money): Money {
         if (other.currency != currency) error("Can't subtract ${currency.name} to ${other.currency.name}")
-        return Money(amount - other.amount, currency)
+        return Money(centsAsLong - other.centsAsLong, currency)
     }
 
-    operator fun times(quantity: Number) = Money((amount * quantity.toDouble()).toInt(), currency)
+    operator fun times(quantity: Double) = Money((centsAsLong.toDouble() * quantity).toULong(), currency)
 
-    operator fun div(quantity: Number) = Money((amount / quantity.toDouble()).toInt(), currency)
+    @JsName("_ignore_times_number")
+    operator fun times(quantity: Number) = times(quantity.toDouble())
+
+    operator fun div(quantity: Double) = Money((centsAsLong.toDouble() / quantity).toULong(), currency)
+
+    @JsName("_ignore_div")
+    operator fun div(quantity: Number) = div(quantity.toDouble())
 
     @JsName("ratio")
-    operator fun div(other: Money) = MoneyRatio((amount.toDouble() / other.amount), currency, other.currency)
+    operator fun div(other: Money) = MoneyRatio((centsAsLong.toDouble() / other.centsAsLong.toDouble()), currency, other.currency)
 
     fun toFormattedString(): String = toFormattedString(MoneyFormatterOptions())
 

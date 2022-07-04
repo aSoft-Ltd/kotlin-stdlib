@@ -2,10 +2,10 @@ package live.internal
 
 import functions.Consumer
 import koncurrent.Executor
-import koncurrent.Executors
 import live.Live
 import live.WatchMode
 import live.Watcher
+import live.mutableLiveOf
 
 internal abstract class AbstractLive<out S> : Live<S> {
 
@@ -25,4 +25,10 @@ internal abstract class AbstractLive<out S> : Live<S> {
     override fun watch(consumer: Consumer<@UnsafeVariance S>, mode: WatchMode) = watchRaw(consumer::accept, null, null)
 
     override fun watch(consumer: Consumer<@UnsafeVariance S>, mode: WatchMode, executor: Executor) = watchRaw(consumer::accept, mode, executor)
+
+    override fun <R> map(transformer: (S) -> R): Live<R> {
+        val live = mutableLiveOf(transformer(value))
+        watch { live.value = transformer(it) }
+        return live
+    }
 }

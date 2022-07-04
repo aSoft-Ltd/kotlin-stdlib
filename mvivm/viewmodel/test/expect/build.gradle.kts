@@ -11,8 +11,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":viewmodel-test-core"))
+                api(projects.viewmodelTestCore)
                 api(asoft.expect.coroutines)
+                api(asoft.kotlinx.collections.atomic)
                 api(kotlinx.coroutines.test)
             }
         }

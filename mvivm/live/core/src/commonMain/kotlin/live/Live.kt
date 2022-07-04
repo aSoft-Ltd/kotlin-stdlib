@@ -4,7 +4,6 @@ package live
 
 import functions.Consumer
 import koncurrent.Executor
-import koncurrent.Executors
 import live.WatchMode.Eagerly
 import live.WatchMode.Casually
 import kotlin.js.JsExport
@@ -28,7 +27,7 @@ interface Live<out S> {
      * @param [mode] - The subscription mode on how to get values
      * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
      *
-     * [executor] tells in
+     * [executor] tells in which thread should the callback be fired from
      *
      * @return a [Watcher]
      */
@@ -48,7 +47,7 @@ interface Live<out S> {
     /**
      * Watch the value as it changes and be updated via a [consumer]
      *
-     * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
+     * [executor] tells in which thread should the callback be fired from
      *
      * @return a [Watcher]
      */
@@ -57,8 +56,6 @@ interface Live<out S> {
 
     /**
      * Watch the value as it changes and be updated via a [consumer]
-     *
-     * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
      *
      * @return a [Watcher]
      */
@@ -79,7 +76,7 @@ interface Live<out S> {
     /**
      * Watch the value as it changes and be updated via a [callback]
      *
-     * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
+     * [executor] tells in which thread should the callback be fired from
      *
      * @return a [Watcher]
      */
@@ -101,12 +98,15 @@ interface Live<out S> {
     /**
      * Watch the value as it changes and be updated via a [callback]
      *
-     * [mode] of how you would like to watch this value. It can be [Eagerly] or [Casually]
-     *
      * @return a [Watcher]
      */
     @JvmSynthetic
     fun watch(callback: (state: S) -> Unit): Watcher
+
+    /**
+     * Transforms this live to another live
+     */
+    fun <R> map(transformer: (S) -> R): Live<R>
 
     /**
      * Stops all [Watcher]s from watching this [Live] [value]
